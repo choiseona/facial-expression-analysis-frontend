@@ -1,5 +1,7 @@
+import BackgroundVideo from "../../components/Homepage/BackgroundVideo";
+
 function HomePage() {
-  return <h2 data-testid="title-text">HomePageTest</h2>;
+  return <BackgroundVideo />;
 }
 
 export default HomePage;
