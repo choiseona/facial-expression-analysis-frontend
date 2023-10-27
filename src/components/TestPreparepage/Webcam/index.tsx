@@ -31,5 +31,5 @@ function Webcam() {
 export default Webcam;
 
 const Video = styled.video`
-  width: 30%;
+  width: 350px;
 `;
