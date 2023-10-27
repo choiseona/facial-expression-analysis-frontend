@@ -9,24 +9,23 @@ function HomePage() {
     <>
       <Header />
       <BackgroundVideo />
-
-      <Layout>
-        <Layout2>
-          <Layout3>
+      <FlexCenter>
+        <FlexColumn>
+          <FlexEnd>
             <ProgramIntroduction />
-          </Layout3>
-          <Layout4>
+          </FlexEnd>
+          <FlexEnd>
             <ProgramStartButton />
-          </Layout4>
-        </Layout2>
-      </Layout>
+          </FlexEnd>
+        </FlexColumn>
+      </FlexCenter>
     </>
   );
 }
 
 export default HomePage;
 
-const Layout = styled.div`
+const FlexCenter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,21 +33,16 @@ const Layout = styled.div`
   width: 100%;
 `;
 
-const Layout2 = styled.div`
+const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 5%;
   margin-left: 40%;
   margin-right: 5%;
-`;
-const Layout3 = styled.div`
-  display: flex;
-  justify-content: end;
+  gap: 10px;
 `;
 
-const Layout4 = styled.div`
-  margin-top: 1rem;
-  width: 100%;
+const FlexEnd = styled.div`
   display: flex;
   justify-content: end;
 `;
