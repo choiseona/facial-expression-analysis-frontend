@@ -1,12 +1,13 @@
 import Background from "@/components/Common/Background";
 import Header from "@/components/Common/Header";
+import Webcam from "@/components/TestPreparepage/Webcam";
 
 function TestPreparePage() {
   return (
-    <>
-      <Background />
+    <Background>
       <Header />
-    </>
+      <Webcam />
+    </Background>
   );
 }
 
