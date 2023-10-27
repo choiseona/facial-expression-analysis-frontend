@@ -15,7 +15,7 @@ const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 500px;
+  width: 800px;
 `;
 const Comment = styled.div`
   color: white;
