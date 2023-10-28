@@ -1,10 +1,22 @@
 import styled from "styled-components";
 
-function TestSample() {
+interface props {
+  setImageLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function TestSample({ setImageLoaded }: props) {
+  const handleToImageLoaded = () => {
+    setImageLoaded(true);
+  };
+
   return (
     <FlexColumn>
       <Comment>사진 샘플에 대한 멘트 한 줄</Comment>
-      <Image src="/src/assets/image/puppy1.jpg" alt="강아지사진" />
+      <Image
+        onLoad={handleToImageLoaded}
+        src="/src/assets/image/puppy1.jpg"
+        alt="강아지사진"
+      />
     </FlexColumn>
   );
 }
