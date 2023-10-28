@@ -1,4 +1,3 @@
-import Background from "@/components/Common/Background";
 import Header from "@/components/Common/Header";
 import Webcam from "@/components/TestProgresspage/Webcam";
 import TestSample from "@/components/TestProgresspage/TestSample";
@@ -12,14 +11,12 @@ function TestProgressPage() {
 
   return (
     <>
-      <Background>
-        <Header />
-        <FlexCenter>
-          <TestSample setImageLoaded={setImageLoaded} />
-          <EmotionTF></EmotionTF>
-        </FlexCenter>
-        {imageLoaded && <Webcam setCapturedImages={setCapturedImages} />}
-      </Background>
+      <Header />
+      <FlexCenter>
+        <TestSample setImageLoaded={setImageLoaded} />
+        <EmotionTF></EmotionTF>
+      </FlexCenter>
+      {imageLoaded && <Webcam setCapturedImages={setCapturedImages} />}
     </>
   );
 }

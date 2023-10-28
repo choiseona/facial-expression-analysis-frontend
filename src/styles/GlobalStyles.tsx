@@ -8,6 +8,7 @@ html,body {
   height:100%;
 }
 #root {
+  background-color: #02020f;
   width: 100%;
   height: 100%;
 }

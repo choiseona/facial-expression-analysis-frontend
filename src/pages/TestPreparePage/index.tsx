@@ -1,4 +1,3 @@
-import Background from "@/components/Common/Background";
 import Header from "@/components/Common/Header";
 import TestNotifincation from "@/components/TestPreparepage/TestNotification";
 import TestStartButton from "@/components/TestPreparepage/TestStartButton";
@@ -7,7 +6,7 @@ import styled from "styled-components";
 
 function TestPreparePage() {
   return (
-    <Background>
+    <>
       <Header />
       <FlexCenter>
         <FlexColumn>
@@ -20,7 +19,7 @@ function TestPreparePage() {
           </FlexEnd>
         </FlexColumn>
       </FlexCenter>
-    </Background>
+    </>
   );
 }
 
