@@ -10,7 +10,7 @@ function EmotionTF() {
 
   return (
     <Center>
-      <h1>어떤 감정을 느꼈나요?</h1>
+      <Question>어떤 감정을 느꼈나요?</Question>
       <RadioGroup>
         <Input
           type="radio"
@@ -46,14 +46,18 @@ const Center = styled.div`
   gap: 10px;
 `;
 
+const Question = styled.h1`
+  font-weight: 600;
+`;
+
 const RadioGroup = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 20px;
 `;
 
 const RadioLabel = styled.label`
-  width: 120px;
-  height: 50px;
+  width: 150px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
