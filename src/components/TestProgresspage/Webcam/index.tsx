@@ -20,7 +20,6 @@ function Webcam({ setCapturedImages }: props) {
     <>
       <Video ref={videoRef} autoPlay playsInline muted />
       <Canvas ref={canvasRef} style={{ display: "none" }} />
-      <button onClick={setTimer}>gg</button>
     </>
   );
 }

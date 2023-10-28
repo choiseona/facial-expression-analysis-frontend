@@ -4,6 +4,7 @@ import Webcam from "@/components/TestProgresspage/Webcam";
 import TestSample from "@/components/TestProgresspage/TestSample";
 import styled from "styled-components";
 import { useState } from "react";
+import EmotionTF from "@/components/TestProgresspage/EmotionTF";
 
 function TestProgressPage() {
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
@@ -15,20 +16,10 @@ function TestProgressPage() {
         <Header />
         <FlexCenter>
           <TestSample setImageLoaded={setImageLoaded} />
+          <EmotionTF></EmotionTF>
         </FlexCenter>
+        {imageLoaded && <Webcam setCapturedImages={setCapturedImages} />}
       </Background>
-      {imageLoaded && <Webcam setCapturedImages={setCapturedImages} />}
-      {capturedImages.length === 5 && (
-        <div>
-          <h2>Captured Images</h2>
-          {capturedImages.map((image, index) => (
-            <div key={index}>
-              <h3>Image {index + 1}</h3>
-              <img src={image} alt={`Captured ${index + 1}`} />
-            </div>
-          ))}
-        </div>
-      )}
     </>
   );
 }
@@ -39,6 +30,7 @@ const FlexCenter = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
