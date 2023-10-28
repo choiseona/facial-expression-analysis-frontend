@@ -8,9 +8,12 @@ html,body {
   height:100%;
 }
 #root {
-  background-color: #02020f;
+  background-color: #18191e;
   width: 100%;
   height: 100%;
+}
+button{
+ all:unset;
 }
 `;
 
