@@ -1,11 +1,13 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-function EmotionTF() {
-  const [emotion, setEmotion] = useState(true);
+interface props {
+  emotionTF: boolean;
+  setEmotionTF: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+function EmotionTF({ setEmotionTF, emotionTF }: props) {
   const handleTochangeRadio = () => {
-    setEmotion(!emotion);
+    setEmotionTF(!emotionTF);
   };
 
   return (
@@ -17,7 +19,7 @@ function EmotionTF() {
           name="emotion"
           id="emotionTrue"
           value="emotionTrue"
-          checked={emotion === true ? true : false}
+          checked={emotionTF === true ? true : false}
           onChange={handleTochangeRadio}
         />
         <RadioLabel htmlFor="emotionTrue">감정 있음</RadioLabel>
@@ -26,7 +28,7 @@ function EmotionTF() {
           name="emotion"
           id="emotionFalse"
           value="emotionFalse"
-          checked={emotion === false ? true : false}
+          checked={emotionTF === false ? true : false}
           onChange={handleTochangeRadio}
         />
         <RadioLabel htmlFor="emotionFalse">감정 없음</RadioLabel>
@@ -43,7 +45,7 @@ const Center = styled.div`
   justify-content: center;
   align-items: center;
   color: #dedede;
-  gap: 10px;
+  gap: 20px;
 `;
 
 const Question = styled.h1`

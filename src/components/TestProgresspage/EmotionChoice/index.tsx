@@ -1,0 +1,122 @@
+import { useState, Fragment } from "react";
+import styled from "styled-components";
+import DropDown from "@/assets/icon/drop_down-down.svg";
+import EmotionDropDown from "../EmotionDropDown";
+import { emotion } from "@/global/data";
+
+interface Props {
+  setDetailEmotion: React.Dispatch<
+    React.SetStateAction<{
+      happy: number;
+      surprise: number;
+      angry: number;
+      fear: number;
+      disgust: number;
+      sad: number;
+    }>
+  >;
+}
+
+interface DropdownOpenType {
+  happy: boolean;
+  surprise: boolean;
+  angry: boolean;
+  fear: boolean;
+  disgust: boolean;
+  sad: boolean;
+}
+
+function EmotionChoice({ setDetailEmotion }: Props) {
+  const [dropdownOpen, setDropdownOpen] = useState<DropdownOpenType>({
+    happy: false,
+    surprise: false,
+    angry: false,
+    fear: false,
+    disgust: false,
+    sad: false,
+  });
+
+  const handleDropdown = (name: keyof DropdownOpenType) => {
+    setDropdownOpen((prev) => ({
+      ...prev,
+      [name]: !prev[name as keyof DropdownOpenType],
+    }));
+  };
+
+  return (
+    <DetailEmotionBox>
+      {emotion.map((item, index) => (
+        <Fragment key={index}>
+          <Emotion
+            onClick={() =>
+              handleDropdown(item.english as keyof DropdownOpenType)
+            }
+          >
+            <EmotionName>{item.korean}</EmotionName>
+            <DropDownImage
+              src={DropDown}
+              alt="드롭다운"
+              className={
+                dropdownOpen[item.english as keyof DropdownOpenType]
+                  ? "open"
+                  : ""
+              }
+            />
+          </Emotion>
+
+          {dropdownOpen[item.english as keyof DropdownOpenType] && (
+            <DetailEmotion>
+              <EmotionDropDown
+                name={item.english}
+                setDetailEmotion={setDetailEmotion}
+              />
+            </DetailEmotion>
+          )}
+          <Underline />
+        </Fragment>
+      ))}
+    </DetailEmotionBox>
+  );
+}
+
+export default EmotionChoice;
+
+const DetailEmotionBox = styled.div`
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const Emotion = styled.button`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+const EmotionName = styled.div`
+  color: #dedede;
+  font-weight: 600;
+`;
+const DropDownImage = styled.img`
+  width: 20px;
+  &.open {
+    transform: rotate(180deg);
+  }
+`;
+
+const DetailEmotion = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
+
+const Underline = styled.hr`
+  width: 100%;
+  border: 1px solid #dedede;
+`;
