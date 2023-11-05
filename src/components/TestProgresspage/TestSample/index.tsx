@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
 interface props {
+  step: number;
   setImageLoaded: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function TestSample({ setImageLoaded }: props) {
+const Images = [
+  "/src/assets/image/puppy1.jpg",
+  "/src/assets/image/puppy2.jpg",
+  "/src/assets/image/puppy3.jpg",
+];
+
+function TestSample({ setImageLoaded, step }: props) {
   const handleToImageLoaded = () => {
     setImageLoaded(true);
   };
@@ -14,7 +21,7 @@ function TestSample({ setImageLoaded }: props) {
       <Comment>사진 샘플에 대한 멘트 한 줄</Comment>
       <Image
         onLoad={handleToImageLoaded}
-        src="/src/assets/image/puppy1.jpg"
+        src={`${Images[step - 1]}`}
         alt="강아지사진"
       />
     </FlexColumn>

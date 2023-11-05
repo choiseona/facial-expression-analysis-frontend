@@ -9,7 +9,6 @@ interface Props {
       surprise: number;
       angry: number;
       fear: number;
-      disgust: number;
       sad: number;
     }>
   >;

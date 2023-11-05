@@ -11,7 +11,6 @@ interface Props {
       surprise: number;
       angry: number;
       fear: number;
-      disgust: number;
       sad: number;
     }>
   >;
@@ -22,7 +21,6 @@ interface DropdownOpenType {
   surprise: boolean;
   angry: boolean;
   fear: boolean;
-  disgust: boolean;
   sad: boolean;
 }
 
@@ -32,7 +30,6 @@ function EmotionChoice({ setDetailEmotion }: Props) {
     surprise: false,
     angry: false,
     fear: false,
-    disgust: false,
     sad: false,
   });
 
