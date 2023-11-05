@@ -6,9 +6,9 @@ ${reset},
 html,body {
   width:100%;
   height:100%;
+  background-color: #18191e;
 }
 #root {
-  background-color: #18191e;
   width: 100%;
   height: 100%;
 }

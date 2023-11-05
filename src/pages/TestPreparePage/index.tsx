@@ -1,4 +1,3 @@
-import Header from "@/components/Common/Header";
 import TestNotifincation from "@/components/TestPreparepage/TestNotification";
 import TestStartButton from "@/components/TestPreparepage/TestStartButton";
 import Webcam from "@/components/TestPreparepage/Webcam";
@@ -6,20 +5,17 @@ import styled from "styled-components";
 
 function TestPreparePage() {
   return (
-    <>
-      <Header />
-      <FlexCenter>
-        <FlexColumn>
-          <Flex>
-            <Webcam />
-            <TestNotifincation />
-          </Flex>
-          <FlexEnd>
-            <TestStartButton />
-          </FlexEnd>
-        </FlexColumn>
-      </FlexCenter>
-    </>
+    <FlexCenter>
+      <FlexColumn>
+        <Flex>
+          <Webcam />
+          <TestNotifincation />
+        </Flex>
+        <FlexEnd>
+          <TestStartButton />
+        </FlexEnd>
+      </FlexColumn>
+    </FlexCenter>
   );
 }
 

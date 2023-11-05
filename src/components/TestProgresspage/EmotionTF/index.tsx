@@ -67,6 +67,10 @@ const RadioLabel = styled.label`
   font-weight: 600;
   border: 1px solid white;
   border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Input = styled.input`

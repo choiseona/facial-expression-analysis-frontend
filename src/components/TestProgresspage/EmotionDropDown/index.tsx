@@ -26,10 +26,11 @@ function EmotionDropDown({ name, setDetailEmotion }: Props) {
   ];
 
   const handleToChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const emotionName = name as keyof Props["setDetailEmotion"];
     setDetailChoice(event.target.value);
     setDetailEmotion((prev) => ({
       ...prev,
-      name: Number(event.target.value),
+      [emotionName]: Number(event.target.value),
     }));
   };
 
@@ -38,7 +39,8 @@ function EmotionDropDown({ name, setDetailEmotion }: Props) {
   ) => {
     if (event.currentTarget.value === detailChoice) {
       setDetailChoice("");
-      setDetailEmotion((prev) => ({ ...prev, name: 0 }));
+      const emotionName = name as keyof Props["setDetailEmotion"];
+      setDetailEmotion((prev) => ({ ...prev, [emotionName]: 0 }));
     }
   };
 

@@ -2,16 +2,16 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface props {
-  address: string;
-  content: string;
+  address?: string;
+  content?: string;
 }
 
 function NavigationButton({ address, content }: props) {
   const navigate = useNavigate();
-  const handleClickStartButton = () => {
+  const handleClickButton = () => {
     navigate(`${address}`);
   };
-  return <Button onClick={handleClickStartButton}>{content}</Button>;
+  return <Button onClick={handleClickButton}>{content}</Button>;
 }
 
 export default NavigationButton;
@@ -26,6 +26,9 @@ const Button = styled.button`
   color: #cecccc;
   border: none;
   background-color: rgba(255, 255, 255, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     cursor: pointer;
