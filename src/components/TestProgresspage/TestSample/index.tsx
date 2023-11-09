@@ -3,26 +3,25 @@ import styled from "styled-components";
 interface props {
   step: number;
   setImageLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+  sample: {
+    base64Image: string[] | undefined;
+    comment: string[] | undefined;
+  };
 }
 
-const Images = [
-  "/src/assets/image/puppy1.jpg",
-  "/src/assets/image/puppy2.jpg",
-  "/src/assets/image/puppy3.jpg",
-];
-
-function TestSample({ setImageLoaded, step }: props) {
+function TestSample({ setImageLoaded, sample, step }: props) {
   const handleToImageLoaded = () => {
     setImageLoaded(true);
   };
-
+  if (!sample.comment) return null;
+  if (!sample.base64Image) return null;
   return (
     <FlexColumn>
-      <Comment>사진 샘플에 대한 멘트 한 줄</Comment>
+      <Comment>{sample.comment[step - 1]}</Comment>
       <Image
         onLoad={handleToImageLoaded}
-        src={`${Images[step - 1]}`}
-        alt="강아지사진"
+        src={`${sample.base64Image[step - 1]}`}
+        alt="sampleImage"
       />
     </FlexColumn>
   );

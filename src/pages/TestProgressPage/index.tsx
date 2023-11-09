@@ -1,7 +1,7 @@
 import Webcam from "@/components/TestProgresspage/Webcam";
 import TestSample from "@/components/TestProgresspage/TestSample";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EmotionTF from "@/components/TestProgresspage/EmotionTF";
 import EmotionChoice from "@/components/TestProgresspage/EmotionChoice";
 import NextTestButton from "@/components/TestProgresspage/NextTestButton";
@@ -19,11 +19,40 @@ function TestProgressPage() {
     sad: 0,
   });
   const [step, setStep] = useState(1);
+  const [sample, setSample] = useState<{
+    id: number | undefined;
+    base64Image: string[] | undefined;
+    comment: string[] | undefined;
+  }>({
+    id: undefined,
+    base64Image: undefined,
+    comment: undefined,
+  });
+
+  useEffect(() => {
+    console.log(detailEmotion);
+  }, [detailEmotion]);
+
+  useEffect(() => {
+    setSample({
+      id: 2,
+      comment: ["테스트1", "테스트2", "테스트3"],
+      base64Image: [
+        "/src/assets/image/puppy1.jpg",
+        "/src/assets/image/puppy2.jpg",
+        "/src/assets/image/puppy3.jpg",
+      ],
+    });
+  }, []);
 
   return (
     <>
       <FlexCenter>
-        <TestSample setImageLoaded={setImageLoaded} step={step} />
+        <TestSample
+          setImageLoaded={setImageLoaded}
+          step={step}
+          sample={sample}
+        />
         {capturedImages.length === 5 && (
           <EmotionTF setEmotionTF={setEmotionTF} emotionTF={emotionTF} />
         )}
@@ -32,7 +61,9 @@ function TestProgressPage() {
         )}
         {capturedImages.length === 5 && step < 3 && (
           <NextTestButton
+            sample={sample}
             step={step}
+            detailEmotion={detailEmotion}
             setStep={setStep}
             setCapturedImages={setCapturedImages}
             setImageLoaded={setImageLoaded}

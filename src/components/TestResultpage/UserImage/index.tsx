@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-function UserImage() {
+interface Props {
+  image: string | undefined;
+}
+
+function UserImage({ image }: Props) {
   return (
     <FlexColumn>
       <Figure>
-        <Image src="/src/assets/image/puppy1.jpg" alt="강아지사진" />
+        <Image src={image} alt="강아지사진" />
         <FigCaption>나의 반응</FigCaption>
       </Figure>
     </FlexColumn>

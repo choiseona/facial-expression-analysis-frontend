@@ -1,8 +1,9 @@
+// EmotionChoice.tsx
 import { useState, Fragment } from "react";
 import styled from "styled-components";
 import DropDown from "@/assets/icon/drop_down-down.svg";
-import EmotionDropDown from "../EmotionDropDown";
 import { emotion } from "@/global/data";
+import EmotionDropDown from "../EmotionDropDown";
 
 interface Props {
   setDetailEmotion: React.Dispatch<
@@ -32,11 +33,23 @@ function EmotionChoice({ setDetailEmotion }: Props) {
     fear: false,
     sad: false,
   });
+  const [detailChoice, setDetailChoice] = useState<{
+    [key: string]: string;
+  }>({});
 
   const handleDropdown = (name: keyof DropdownOpenType) => {
     setDropdownOpen((prev) => ({
       ...prev,
       [name]: !prev[name as keyof DropdownOpenType],
+    }));
+  };
+
+  const handleToChangeRadio = (name: string, value: string) => {
+    setDetailChoice((prev) => ({ ...prev, [name]: value }));
+    const emotionName = name as keyof Props["setDetailEmotion"];
+    setDetailEmotion((prev) => ({
+      ...prev,
+      [emotionName]: Number(value),
     }));
   };
 
@@ -65,7 +78,8 @@ function EmotionChoice({ setDetailEmotion }: Props) {
             <DetailEmotion>
               <EmotionDropDown
                 name={item.english}
-                setDetailEmotion={setDetailEmotion}
+                detailChoice={detailChoice[item.english]}
+                handleToChangeRadio={handleToChangeRadio}
               />
             </DetailEmotion>
           )}

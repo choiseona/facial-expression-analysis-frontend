@@ -1,21 +1,14 @@
-import { useState, Fragment } from "react";
+// EmotionDropDown.tsx
+import { Fragment } from "react";
 import styled from "styled-components";
 
 interface Props {
   name: string;
-  setDetailEmotion: React.Dispatch<
-    React.SetStateAction<{
-      happy: number;
-      surprise: number;
-      angry: number;
-      fear: number;
-      sad: number;
-    }>
-  >;
+  detailChoice: string;
+  handleToChangeRadio: (name: string, value: string) => void;
 }
 
-function EmotionDropDown({ name, setDetailEmotion }: Props) {
-  const [detailChoice, setDetailChoice] = useState("");
+function EmotionDropDown({ name, detailChoice, handleToChangeRadio }: Props) {
   const radioValue = [
     { key: "매우 조금", score: "1" },
     { key: "조금", score: "2" },
@@ -24,22 +17,9 @@ function EmotionDropDown({ name, setDetailEmotion }: Props) {
     { key: "매우 많이", score: "5" },
   ];
 
-  const handleToChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const emotionName = name as keyof Props["setDetailEmotion"];
-    setDetailChoice(event.target.value);
-    setDetailEmotion((prev) => ({
-      ...prev,
-      [emotionName]: Number(event.target.value),
-    }));
-  };
-
-  const handleToClickSameRadio = (
-    event: React.MouseEvent<HTMLInputElement>
-  ) => {
-    if (event.currentTarget.value === detailChoice) {
-      setDetailChoice("");
-      const emotionName = name as keyof Props["setDetailEmotion"];
-      setDetailEmotion((prev) => ({ ...prev, [emotionName]: 0 }));
+  const handleToClickSameRadio = (value: string) => {
+    if (value === detailChoice) {
+      handleToChangeRadio(name, "0");
     }
   };
 
@@ -53,8 +33,8 @@ function EmotionDropDown({ name, setDetailEmotion }: Props) {
             id={`${name} ${item.score}`}
             value={item.score}
             checked={item.score === detailChoice}
-            onClick={handleToClickSameRadio}
-            onChange={handleToChangeRadio}
+            onClick={() => handleToClickSameRadio(item.score)}
+            onChange={(e) => handleToChangeRadio(name, e.target.value)}
           />
           <RadioLabel htmlFor={`${name} ${item.score}`}>{item.key}</RadioLabel>
         </Fragment>
