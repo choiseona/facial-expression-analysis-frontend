@@ -1,14 +1,36 @@
 import styled from "styled-components";
+import { useEffect } from "react";
 
 interface props {
   emotionTF: boolean;
   setEmotionTF: React.Dispatch<React.SetStateAction<boolean>>;
+  setDetailEmotion: React.Dispatch<
+    React.SetStateAction<{
+      happy: number;
+      surprise: number;
+      angry: number;
+      fear: number;
+      sad: number;
+    }>
+  >;
 }
 
-function EmotionTF({ setEmotionTF, emotionTF }: props) {
+function EmotionTF({ setEmotionTF, emotionTF, setDetailEmotion }: props) {
   const handleTochangeRadio = () => {
     setEmotionTF(!emotionTF);
   };
+
+  useEffect(() => {
+    if (!emotionTF) {
+      setDetailEmotion({
+        happy: 0,
+        surprise: 0,
+        angry: 0,
+        fear: 0,
+        sad: 0,
+      });
+    }
+  }, [emotionTF]);
 
   return (
     <Center>

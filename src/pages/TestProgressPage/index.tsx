@@ -54,7 +54,11 @@ function TestProgressPage() {
           sample={sample}
         />
         {capturedImages.length === 5 && (
-          <EmotionTF setEmotionTF={setEmotionTF} emotionTF={emotionTF} />
+          <EmotionTF
+            setEmotionTF={setEmotionTF}
+            emotionTF={emotionTF}
+            setDetailEmotion={setDetailEmotion}
+          />
         )}
         {capturedImages.length === 5 && emotionTF && (
           <EmotionChoice setDetailEmotion={setDetailEmotion} />
