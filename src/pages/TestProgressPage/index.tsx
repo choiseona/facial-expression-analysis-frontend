@@ -7,6 +7,12 @@ import EmotionChoice from "@/components/TestProgresspage/EmotionChoice";
 import NextTestButton from "@/components/TestProgresspage/NextTestButton";
 import TestResultButton from "@/components/TestProgresspage/TestResultButton";
 
+interface SampleType {
+  id: number | undefined;
+  sampleUrl: string | undefined;
+  comment: string | undefined;
+}
+
 function TestProgressPage() {
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -19,30 +25,32 @@ function TestProgressPage() {
     sad: 0,
   });
   const [step, setStep] = useState(1);
-  const [sample, setSample] = useState<{
-    id: number | undefined;
-    base64Image: string[] | undefined;
-    comment: string[] | undefined;
-  }>({
-    id: undefined,
-    base64Image: undefined,
-    comment: undefined,
-  });
+  const [sample, setSample] = useState<SampleType[]>([
+    {
+      id: undefined,
+      sampleUrl: undefined,
+      comment: undefined,
+    },
+  ]);
 
   useEffect(() => {
-    console.log(detailEmotion);
-  }, [detailEmotion]);
-
-  useEffect(() => {
-    setSample({
-      id: 2,
-      comment: ["테스트1", "테스트2", "테스트3"],
-      base64Image: [
-        "/src/assets/image/puppy1.jpg",
-        "/src/assets/image/puppy2.jpg",
-        "/src/assets/image/puppy3.jpg",
-      ],
-    });
+    setSample([
+      {
+        id: 1,
+        sampleUrl: "/src/assets/image/puppy1.jpg",
+        comment: "test1",
+      },
+      {
+        id: 2,
+        sampleUrl: "/src/assets/image/puppy2.jpg",
+        comment: "test2",
+      },
+      {
+        id: 3,
+        sampleUrl: "/src/assets/image/puppy3.jpg",
+        comment: "test3",
+      },
+    ]);
   }, []);
 
   return (
@@ -51,7 +59,7 @@ function TestProgressPage() {
         <TestSample
           setImageLoaded={setImageLoaded}
           step={step}
-          sample={sample}
+          sample={sample[step - 1]}
         />
         {capturedImages.length === 5 && (
           <EmotionTF
@@ -65,7 +73,7 @@ function TestProgressPage() {
         )}
         {capturedImages.length === 5 && step < 3 && (
           <NextTestButton
-            sample={sample}
+            id={sample[step - 1].id}
             step={step}
             detailEmotion={detailEmotion}
             setStep={setStep}

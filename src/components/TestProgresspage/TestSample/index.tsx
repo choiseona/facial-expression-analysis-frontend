@@ -4,23 +4,23 @@ interface props {
   step: number;
   setImageLoaded: React.Dispatch<React.SetStateAction<boolean>>;
   sample: {
-    base64Image: string[] | undefined;
-    comment: string[] | undefined;
+    sampleUrl: string | undefined;
+    comment: string | undefined;
   };
 }
 
-function TestSample({ setImageLoaded, sample, step }: props) {
+function TestSample({ setImageLoaded, sample }: props) {
   const handleToImageLoaded = () => {
     setImageLoaded(true);
   };
   if (!sample.comment) return null;
-  if (!sample.base64Image) return null;
+  if (!sample.sampleUrl) return null;
   return (
     <FlexColumn>
-      <Comment>{sample.comment[step - 1]}</Comment>
+      <Comment>{sample.comment}</Comment>
       <Image
         onLoad={handleToImageLoaded}
-        src={`${sample.base64Image[step - 1]}`}
+        src={`${sample.sampleUrl}`}
         alt="sampleImage"
       />
     </FlexColumn>

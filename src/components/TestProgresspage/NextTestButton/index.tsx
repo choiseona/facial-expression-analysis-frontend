@@ -10,9 +10,7 @@ interface EmotionProps {
 
 interface Props {
   step: number;
-  sample: {
-    id: number | undefined;
-  };
+  id: number | undefined;
   detailEmotion: EmotionProps;
   setStep: React.Dispatch<React.SetStateAction<number>>;
   setCapturedImages: React.Dispatch<React.SetStateAction<string[]>>;
