@@ -2,13 +2,11 @@ import styled from "styled-components";
 
 interface Props {
   image: string | undefined;
-  comment: string | undefined;
 }
 
-function TestSample({ image, comment }: Props) {
+function TestSample({ image }: Props) {
   return (
     <FlexColumn>
-      <Comment>{comment}</Comment>
       <Figure>
         <Image src={image} alt="강아지사진" />
         <FigCaption>감정 유발 샘플</FigCaption>
@@ -25,12 +23,6 @@ const FlexColumn = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-`;
-const Comment = styled.div`
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Image = styled.img`

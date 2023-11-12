@@ -1,3 +1,4 @@
+import axios from "axios";
 import styled from "styled-components";
 
 interface EmotionProps {
@@ -12,6 +13,7 @@ interface Props {
   step: number;
   id: number | undefined;
   detailEmotion: EmotionProps;
+  capturedImages: string[];
   setStep: React.Dispatch<React.SetStateAction<number>>;
   setCapturedImages: React.Dispatch<React.SetStateAction<string[]>>;
   setImageLoaded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,15 +22,16 @@ interface Props {
 }
 function NextTestButton({
   step,
+  id,
+  detailEmotion,
+  capturedImages,
   setStep,
   setCapturedImages,
   setImageLoaded,
   setEmotionTF,
   setDetailEmotion,
 }: Props) {
-  const handleClickNextStep = () => {
-    //서버로 detailEmotion 전송하는 코드
-    //서버로 사용자 사진 5장 전송하는 코드
+  const initialization = () => {
     setStep(step + 1);
     setCapturedImages([]);
     setImageLoaded(false);
@@ -40,6 +43,63 @@ function NextTestButton({
       fear: 0,
       sad: 0,
     });
+  };
+
+  const postDetailEmotion = () => {
+    axios
+      .post(
+        `http://localhost:8080/api/test/feedback?id=${id}`,
+        JSON.stringify(detailEmotion),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const dataURItoBlob = (dataURI: string) => {
+    const byteString = atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([int8Array], { type: "image/jpeg" });
+  };
+
+  const postCapturedImages = () => {
+    console.log("id", id);
+    console.log("capturedimages", capturedImages);
+
+    const formData = new FormData();
+    capturedImages?.forEach((image, index) => {
+      const blob = dataURItoBlob(image.split(",")[1]);
+      formData.append(`file${index + 1}`, blob);
+    });
+
+    axios
+      .post(`http://localhost:8080/api/test/camera/${id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const postToServer = async () => {
+    postDetailEmotion();
+    postCapturedImages();
+  };
+
+  const handleClickNextStep = async () => {
+    await postToServer();
+    initialization();
   };
 
   return <Button onClick={handleClickNextStep}>다음 테스트</Button>;

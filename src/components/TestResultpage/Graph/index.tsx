@@ -10,58 +10,58 @@ import {
 import styled from "styled-components";
 
 interface Props {
-  result: {
-    ai: {
+  results: {
+    result: {
       happy: number | undefined;
       surprise: number | undefined;
       angry: number | undefined;
       fear: number | undefined;
       sad: number | undefined;
     };
-    user: {
+    feedback: {
       happy: number | undefined;
       surprise: number | undefined;
       angry: number | undefined;
       fear: number | undefined;
       sad: number | undefined;
     };
-    error: number | undefined;
+    deviation: number | undefined;
   };
 }
 
-function Graph({ result }: Props) {
+function Graph({ results }: Props) {
   const data = [
     {
       name: "기쁨",
-      "ai 분석 결과": result.ai.happy,
-      "사용자 의견": result.user.happy,
+      "ai 분석 결과": results.result.happy,
+      "사용자 의견": results.feedback.happy,
     },
     {
       name: "당황",
-      "ai 분석 결과": result.ai.surprise,
-      "사용자 의견": result.user.surprise,
+      "ai 분석 결과": results.result.surprise,
+      "사용자 의견": results.feedback.surprise,
     },
     {
       name: "분노",
-      "ai 분석 결과": result.ai.angry,
-      "사용자 의견": result.user.angry,
+      "ai 분석 결과": results.result.angry,
+      "사용자 의견": results.feedback.angry,
     },
     {
       name: "불안",
-      "ai 분석 결과": result.ai.fear,
-      "사용자 의견": result.user.fear,
+      "ai 분석 결과": results.result.fear,
+      "사용자 의견": results.feedback.fear,
     },
     {
       name: "슬픔",
-      "ai 분석 결과": result.ai.sad,
-      "사용자 의견": result.user.sad,
+      "ai 분석 결과": results.result.sad,
+      "사용자 의견": results.feedback.sad,
     },
   ];
 
   return (
     <>
       <TotalErrorComment>
-        페이스 인식 기반 감정 분석기의 오차: {`${result.error}`}
+        페이스 인식 기반 감정 분석기의 오차: {`${results.deviation}`}
       </TotalErrorComment>
 
       <BarChart width={730} height={250} data={data}>

@@ -4,7 +4,7 @@ interface props {
   step: number;
   setImageLoaded: React.Dispatch<React.SetStateAction<boolean>>;
   sample: {
-    sampleUrl: string | undefined;
+    sampleImg: string | undefined;
     comment: string | undefined;
   };
 }
@@ -14,13 +14,13 @@ function TestSample({ setImageLoaded, sample }: props) {
     setImageLoaded(true);
   };
   if (!sample.comment) return null;
-  if (!sample.sampleUrl) return null;
+  if (!sample.sampleImg) return null;
   return (
     <FlexColumn>
       <Comment>{sample.comment}</Comment>
       <Image
         onLoad={handleToImageLoaded}
-        src={`${sample.sampleUrl}`}
+        src={`${sample.sampleImg}`}
         alt="sampleImage"
       />
     </FlexColumn>

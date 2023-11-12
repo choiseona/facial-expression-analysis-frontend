@@ -4,130 +4,105 @@ import TestSample from "@/components/TestResultpage/TestSample";
 import UserImage from "@/components/TestResultpage/UserImage";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
-function TestResultPage() {
+interface ResultType {
+  faceImg: string | undefined;
+  sampleImg: string | undefined;
+  result: {
+    happy: number | undefined;
+    surprise: number | undefined;
+    angry: number | undefined;
+    fear: number | undefined;
+    sad: number | undefined;
+  };
+  feedback: {
+    happy: number | undefined;
+    surprise: number | undefined;
+    angry: number | undefined;
+    fear: number | undefined;
+    sad: number | undefined;
+  };
+  deviation: number | undefined;
+}
+
+interface Props {
+  id: number[] | undefined;
+}
+function TestResultPage({ id }: Props) {
   const [resultStep, setResultStep] = useState(1);
-  const [result, setResult] = useState<
+  const [result, setResult] = useState<ResultType[]>([
     {
-      base64Image: string | undefined;
-      comment: string | undefined;
-      userImage: string | undefined;
-      ai: {
-        happy: number | undefined;
-        surprise: number | undefined;
-        angry: number | undefined;
-        fear: number | undefined;
-        sad: number | undefined;
-      };
-      user: {
-        happy: number | undefined;
-        surprise: number | undefined;
-        angry: number | undefined;
-        fear: number | undefined;
-        sad: number | undefined;
-      };
-      error: number | undefined;
-    }[]
-  >([
-    {
-      base64Image: undefined,
-      comment: undefined,
-      userImage: undefined,
-      ai: {
+      faceImg: undefined,
+      sampleImg: undefined,
+      result: {
         happy: undefined,
         surprise: undefined,
         angry: undefined,
         fear: undefined,
         sad: undefined,
       },
-      user: {
+      feedback: {
         happy: undefined,
         surprise: undefined,
         angry: undefined,
         fear: undefined,
         sad: undefined,
       },
-      error: undefined,
+      deviation: undefined,
     },
   ]);
 
   useEffect(() => {
     //서버로부터 모든 샘플에 대한 샘플데이터(문구, 사진), 사용자 반응(사진), ai 분석 수치, 사용자 실제 감정 수치 받기
-    setResult([
-      {
-        base64Image: "/src/assets/image/puppy1.jpg",
-        comment: "테스트1",
-        userImage: "/src/assets/image/puppy1.jpg",
-        ai: {
-          happy: 0.1,
-          surprise: 0.1,
-          angry: 0.1,
-          fear: 0.1,
-          sad: 0.1,
-        },
-        user: {
-          happy: 0.2,
-          surprise: 0.2,
-          angry: 0.2,
-          fear: 0.2,
-          sad: 0.2,
-        },
-        error: 10,
-      },
-      {
-        base64Image: "/src/assets/image/puppy2.jpg",
-        comment: "테스트2",
-        userImage: "/src/assets/image/puppy2.jpg",
-        ai: {
-          happy: 0.2,
-          surprise: 0.2,
-          angry: 0.2,
-          fear: 0.2,
-          sad: 0.2,
-        },
-        user: {
-          happy: 0.3,
-          surprise: 0.3,
-          angry: 0.3,
-          fear: 0.3,
-          sad: 0.3,
-        },
-        error: 20,
-      },
-      {
-        base64Image: "/src/assets/image/puppy3.jpg",
-        comment: "테스트3",
-        userImage: "/src/assets/image/puppy3.jpg",
-        ai: {
-          happy: 0.3,
-          surprise: 0.3,
-          angry: 0.3,
-          fear: 0.3,
-          sad: 0.3,
-        },
-        user: {
-          happy: 0.4,
-          surprise: 0.4,
-          angry: 0.4,
-          fear: 0.4,
-          sad: 0.4,
-        },
-        error: 30,
-      },
-    ]);
+
+    axios
+      .post(
+        `http://localhost:8080/api/test/result`,
+        JSON.stringify({ ids: id }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        const data = res.data.results;
+        setResult(
+          data.map((item: ResultType) => ({
+            faceImg: `data:image/jpeg;base64,${item.faceImg}`,
+            sampleImg: `data:image/jpeg;base64,${item.sampleImg}`,
+            result: {
+              happy: item.result.happy,
+              surprise: item.result.surprise,
+              angry: item.result.angry,
+              fear: item.result.fear,
+              sad: item.result.sad,
+            },
+            feedback: {
+              happy: item.feedback.happy,
+              surprise: item.feedback.surprise,
+              angry: item.feedback.angry,
+              fear: item.feedback.fear,
+              sad: item.feedback.sad,
+            },
+            deviation: item.deviation,
+          }))
+        );
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
   return (
     <FlexCol>
       <ResultStepRadio resultStep={resultStep} setResultStep={setResultStep} />
       <FlexRow>
-        <TestSample
-          image={result[resultStep - 1].base64Image}
-          comment={result[resultStep - 1].comment}
-        />
-        <UserImage image={result[resultStep - 1].userImage} />
+        <TestSample image={result[resultStep - 1].sampleImg} />
+        <UserImage image={result[resultStep - 1].faceImg} />
       </FlexRow>
-      <Graph result={result[resultStep - 1]} />
+      <Graph results={result[resultStep - 1]} />
     </FlexCol>
   );
 }

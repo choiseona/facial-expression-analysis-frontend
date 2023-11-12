@@ -6,14 +6,19 @@ import EmotionTF from "@/components/TestProgresspage/EmotionTF";
 import EmotionChoice from "@/components/TestProgresspage/EmotionChoice";
 import NextTestButton from "@/components/TestProgresspage/NextTestButton";
 import TestResultButton from "@/components/TestProgresspage/TestResultButton";
+import axios from "axios";
+
+interface Props {
+  setId: React.Dispatch<React.SetStateAction<number[]>>;
+}
 
 interface SampleType {
   id: number | undefined;
-  sampleUrl: string | undefined;
+  sampleImg: string | undefined;
   comment: string | undefined;
 }
 
-function TestProgressPage() {
+function TestProgressPage({ setId }: Props) {
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [emotionTF, setEmotionTF] = useState(true);
@@ -28,29 +33,28 @@ function TestProgressPage() {
   const [sample, setSample] = useState<SampleType[]>([
     {
       id: undefined,
-      sampleUrl: undefined,
+      sampleImg: undefined,
       comment: undefined,
     },
   ]);
 
   useEffect(() => {
-    setSample([
-      {
-        id: 1,
-        sampleUrl: "/src/assets/image/puppy1.jpg",
-        comment: "test1",
-      },
-      {
-        id: 2,
-        sampleUrl: "/src/assets/image/puppy2.jpg",
-        comment: "test2",
-      },
-      {
-        id: 3,
-        sampleUrl: "/src/assets/image/puppy3.jpg",
-        comment: "test3",
-      },
-    ]);
+    axios
+      .get("http://localhost:8080/api/test/start")
+      .then((res) => {
+        const data = res.data.tests;
+        setSample(
+          data.map((item: SampleType) => ({
+            id: item.id,
+            sampleImg: `data:image/jpeg;base64,${item.sampleImg}`,
+            comment: item.comment,
+          }))
+        );
+        setId(data.map((item: SampleType) => item.id));
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
   return (
@@ -76,6 +80,7 @@ function TestProgressPage() {
             id={sample[step - 1].id}
             step={step}
             detailEmotion={detailEmotion}
+            capturedImages={capturedImages}
             setStep={setStep}
             setCapturedImages={setCapturedImages}
             setImageLoaded={setImageLoaded}
@@ -83,7 +88,13 @@ function TestProgressPage() {
             setDetailEmotion={setDetailEmotion}
           />
         )}
-        {capturedImages.length === 5 && step === 3 && <TestResultButton />}
+        {capturedImages.length === 5 && step === 3 && (
+          <TestResultButton
+            detailEmotion={detailEmotion}
+            id={sample[step - 1].id}
+            capturedImages={capturedImages}
+          />
+        )}
       </FlexCenter>
       {imageLoaded && <Webcam setCapturedImages={setCapturedImages} />}
     </>
