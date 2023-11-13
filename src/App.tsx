@@ -7,7 +7,7 @@ import TestResultPage from "./pages/TestResultPage";
 import Header from "./components/Common/Header";
 
 function App() {
-  const [id, setId] = useState<number[]>([]);
+  const [id, setId] = useState<number[] | undefined>([]);
 
   return (
     <>

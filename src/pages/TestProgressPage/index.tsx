@@ -9,7 +9,7 @@ import TestResultButton from "@/components/TestProgresspage/TestResultButton";
 import axios from "axios";
 
 interface Props {
-  setId: React.Dispatch<React.SetStateAction<number[]>>;
+  setId: React.Dispatch<React.SetStateAction<number[] | undefined>>;
 }
 
 interface SampleType {
@@ -38,6 +38,36 @@ function TestProgressPage({ setId }: Props) {
     },
   ]);
 
+  const data = [
+    {
+      id: 1,
+      sampleImg: "/src/assets/image/puppy1.jpg",
+      comment: "test1",
+    },
+    {
+      id: 2,
+      sampleImg: "/src/assets/image/puppy2.jpg",
+      comment: "test2",
+    },
+    {
+      id: 3,
+      sampleImg: "/src/assets/image/puppy3.jpg",
+      comment: "test3",
+    },
+  ];
+
+  useEffect(() => {
+    setSample(
+      data.map((item: SampleType) => ({
+        id: item.id,
+        sampleImg: item.sampleImg,
+        comment: item.comment,
+      }))
+    );
+    setId(data.map((item: SampleType) => item.id || 0));
+  }, []);
+
+  /*
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/test/start")
@@ -50,12 +80,13 @@ function TestProgressPage({ setId }: Props) {
             comment: item.comment,
           }))
         );
-        setId(data.map((item: SampleType) => item.id));
+        setId(data.map((item: SampleType) => item.id || 0));
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   }, []);
+  */
 
   return (
     <>

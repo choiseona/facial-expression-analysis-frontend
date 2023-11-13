@@ -45,6 +45,7 @@ function NextTestButton({
     });
   };
 
+  /*
   const postDetailEmotion = () => {
     axios
       .post(
@@ -99,6 +100,11 @@ function NextTestButton({
 
   const handleClickNextStep = async () => {
     await postToServer();
+    initialization();
+  };
+*/
+
+  const handleClickNextStep = async () => {
     initialization();
   };
 

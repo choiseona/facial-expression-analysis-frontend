@@ -26,7 +26,7 @@ const FlexColumn = styled.div`
 `;
 
 const Image = styled.img`
-  width: 300px;
+  height: 225px;
 `;
 
 const Figure = styled.figure`

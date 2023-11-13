@@ -17,6 +17,7 @@ interface Props {
       angry: number | undefined;
       fear: number | undefined;
       sad: number | undefined;
+      neutral: number | undefined;
     };
     feedback: {
       happy: number | undefined;
@@ -24,6 +25,7 @@ interface Props {
       angry: number | undefined;
       fear: number | undefined;
       sad: number | undefined;
+      neutral: number | undefined;
     };
     deviation: number | undefined;
   };
@@ -55,6 +57,11 @@ function Graph({ results }: Props) {
       name: "슬픔",
       "ai 분석 결과": results.result.sad,
       "사용자 의견": results.feedback.sad,
+    },
+    {
+      name: "무표정",
+      "ai 분석 결과": results.result.neutral,
+      "사용자 의견": results.feedback.neutral,
     },
   ];
 
