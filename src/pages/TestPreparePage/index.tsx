@@ -1,3 +1,4 @@
+import FadeFramerMotion from "@/components/Common/FadeFramerMotion";
 import TestNotifincation from "@/components/TestPreparepage/TestNotification";
 import TestStartButton from "@/components/TestPreparepage/TestStartButton";
 import Webcam from "@/components/TestPreparepage/Webcam";
@@ -5,17 +6,19 @@ import styled from "styled-components";
 
 function TestPreparePage() {
   return (
-    <FlexCenter>
-      <FlexColumn>
-        <Flex>
-          <Webcam />
-          <TestNotifincation />
-        </Flex>
-        <FlexEnd>
-          <TestStartButton />
-        </FlexEnd>
-      </FlexColumn>
-    </FlexCenter>
+    <FadeFramerMotion>
+      <FlexCenter>
+        <FlexColumn>
+          <Flex>
+            <Webcam />
+            <TestNotifincation />
+          </Flex>
+          <FlexEnd>
+            <TestStartButton />
+          </FlexEnd>
+        </FlexColumn>
+      </FlexCenter>
+    </FadeFramerMotion>
   );
 }
 

@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { ResultType } from "@/global/type";
 import getResults from "@/apis/getResults";
 import { initialResult, testResult } from "@/global/data";
+import FadeFramerMotion from "@/components/Common/FadeFramerMotion";
 
 interface Props {
   id: number[] | undefined;
@@ -15,24 +16,30 @@ function TestResultPage({ id }: Props) {
   const [resultStep, setResultStep] = useState(1);
   const [result, setResult] = useState<ResultType[]>([initialResult]);
 
+  /*
   useEffect(() => {
     getResults({ id, setResult });
   }, []);
+*/
 
-  /*
   useEffect(() => {
     setResult(testResult);
   }, []);
-*/
+
   return (
-    <FlexCol>
-      <ResultStepRadio resultStep={resultStep} setResultStep={setResultStep} />
-      <FlexRow>
-        <TestSample image={result[resultStep - 1].sampleImg} />
-        <UserImage image={result[resultStep - 1].faceImg} />
-      </FlexRow>
-      <Graph results={result[resultStep - 1]} />
-    </FlexCol>
+    <FadeFramerMotion>
+      <FlexCol>
+        <ResultStepRadio
+          resultStep={resultStep}
+          setResultStep={setResultStep}
+        />
+        <FlexRow>
+          <TestSample image={result[resultStep - 1].sampleImg} />
+          <UserImage image={result[resultStep - 1].faceImg} />
+        </FlexRow>
+        <Graph results={result[resultStep - 1]} />
+      </FlexCol>
+    </FadeFramerMotion>
   );
 }
 

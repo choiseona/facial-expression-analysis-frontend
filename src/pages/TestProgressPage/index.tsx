@@ -9,6 +9,7 @@ import TestResultButton from "@/components/TestProgresspage/TestResultButton";
 import { SampleType } from "@/global/type";
 import getSamples from "@/apis/getSamples";
 import { initialEmotion, initialSample, testSample } from "@/global/data";
+import FadeFramerMotion from "@/components/Common/FadeFramerMotion";
 
 interface Props {
   setId: React.Dispatch<React.SetStateAction<number[] | undefined>>;
@@ -22,7 +23,6 @@ function TestProgressPage({ setId }: Props) {
   const [step, setStep] = useState(1);
   const [sample, setSample] = useState<SampleType[]>([initialSample]);
 
-  /*
   useEffect(() => {
     setSample(
       testSample.map((item: SampleType) => ({
@@ -33,16 +33,18 @@ function TestProgressPage({ setId }: Props) {
     );
     setId(testSample.map((item: SampleType) => item.id || 0));
   }, []);
-  */
 
+  /*
   useEffect(() => {
     getSamples({ setSample, setId });
   }, []);
+*/
 
   return (
-    <>
-      <FlexCenter>
+    <FadeFramerMotion>
+      <FlexCenter $isCenter={capturedImages.length !== 5 || !emotionTF}>
         <TestSample
+          capturedImages={capturedImages}
           setImageLoaded={setImageLoaded}
           step={step}
           sample={sample[step - 1]}
@@ -77,21 +79,22 @@ function TestProgressPage({ setId }: Props) {
             capturedImages={capturedImages}
           />
         )}
+        {imageLoaded && <Webcam setCapturedImages={setCapturedImages} />}
       </FlexCenter>
-      {imageLoaded && <Webcam setCapturedImages={setCapturedImages} />}
-    </>
+    </FadeFramerMotion>
   );
 }
 
 export default TestProgressPage;
 
-const FlexCenter = styled.div`
+const FlexCenter = styled.div<{ $isCenter: boolean }>`
   width: 90%;
-  height: auto;
+  min-height: 100%;
+  padding-top: ${(props) => (props.$isCenter ? "0" : "90px")};
   margin: 0 auto;
-  padding-top: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 40px;
 `;

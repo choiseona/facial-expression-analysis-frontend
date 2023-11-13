@@ -23,8 +23,8 @@ const HeaderBar = styled.header`
   height: 70px;
   display: flex;
   align-items: center;
-  background-color: transparent;
   color: #cecccc;
+  background-color: #18191e;
   z-index: 20;
 `;
 

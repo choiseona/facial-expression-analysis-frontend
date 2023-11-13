@@ -1,3 +1,4 @@
+import FadeFramerMotion from "@/components/Common/FadeFramerMotion";
 import BackgroundVideo from "@components/Homepage/BackgroundVideo";
 import ProgramIntroduction from "@components/Homepage/ProgramIntroduction";
 import ProgramStartButton from "@components/Homepage/ProgramStartButton";
@@ -5,7 +6,7 @@ import styled from "styled-components";
 
 function HomePage() {
   return (
-    <>
+    <FadeFramerMotion>
       <BackgroundVideo />
       <FlexCenter>
         <FlexColumn>
@@ -17,7 +18,7 @@ function HomePage() {
           </FlexEnd>
         </FlexColumn>
       </FlexCenter>
-    </>
+    </FadeFramerMotion>
   );
 }
 
