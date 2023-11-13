@@ -15,16 +15,15 @@ function TestResultPage({ id }: Props) {
   const [resultStep, setResultStep] = useState(1);
   const [result, setResult] = useState<ResultType[]>([initialResult]);
 
-  /*
   useEffect(() => {
     getResults({ id, setResult });
   }, []);
-  */
 
+  /*
   useEffect(() => {
     setResult(testResult);
   }, []);
-
+*/
   return (
     <FlexCol>
       <ResultStepRadio resultStep={resultStep} setResultStep={setResultStep} />
@@ -38,7 +37,7 @@ function TestResultPage({ id }: Props) {
 }
 
 const FlexCol = styled.div`
-  margin-top: 70px;
+  padding-top: 90px;
   display: flex;
   flex-direction: column;
   justify-content: center;

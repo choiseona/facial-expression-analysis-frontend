@@ -22,6 +22,7 @@ function TestProgressPage({ setId }: Props) {
   const [step, setStep] = useState(1);
   const [sample, setSample] = useState<SampleType[]>([initialSample]);
 
+  /*
   useEffect(() => {
     setSample(
       testSample.map((item: SampleType) => ({
@@ -32,12 +33,11 @@ function TestProgressPage({ setId }: Props) {
     );
     setId(testSample.map((item: SampleType) => item.id || 0));
   }, []);
-
-  /*
-  useEffect(() => {
-    getSamples({setSample, setId});
-  },[]);
   */
+
+  useEffect(() => {
+    getSamples({ setSample, setId });
+  }, []);
 
   return (
     <>
@@ -89,8 +89,7 @@ const FlexCenter = styled.div`
   width: 90%;
   height: auto;
   margin: 0 auto;
-  margin-top: 90px;
-  padding-bottom: 50px;
+  padding-top: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;
