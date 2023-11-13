@@ -8,6 +8,7 @@ import NextTestButton from "@/components/TestProgresspage/NextTestButton";
 import TestResultButton from "@/components/TestProgresspage/TestResultButton";
 import { SampleType } from "@/global/type";
 import getSamples from "@/apis/getSamples";
+import { initialEmotion, initialSample, testSample } from "@/global/data";
 
 interface Props {
   setId: React.Dispatch<React.SetStateAction<number[] | undefined>>;
@@ -17,49 +18,19 @@ function TestProgressPage({ setId }: Props) {
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [emotionTF, setEmotionTF] = useState(true);
-  const [detailEmotion, setDetailEmotion] = useState({
-    happy: 0,
-    surprise: 0,
-    angry: 0,
-    fear: 0,
-    sad: 0,
-  });
+  const [detailEmotion, setDetailEmotion] = useState(initialEmotion);
   const [step, setStep] = useState(1);
-  const [sample, setSample] = useState<SampleType[]>([
-    {
-      id: undefined,
-      sampleImg: undefined,
-      comment: undefined,
-    },
-  ]);
-
-  const data = [
-    {
-      id: 1,
-      sampleImg: "/src/assets/image/puppy1.jpg",
-      comment: "test1",
-    },
-    {
-      id: 2,
-      sampleImg: "/src/assets/image/puppy2.jpg",
-      comment: "test2",
-    },
-    {
-      id: 3,
-      sampleImg: "/src/assets/image/puppy3.jpg",
-      comment: "test3",
-    },
-  ];
+  const [sample, setSample] = useState<SampleType[]>([initialSample]);
 
   useEffect(() => {
     setSample(
-      data.map((item: SampleType) => ({
+      testSample.map((item: SampleType) => ({
         id: item.id,
         sampleImg: item.sampleImg,
         comment: item.comment,
       }))
     );
-    setId(data.map((item: SampleType) => item.id || 0));
+    setId(testSample.map((item: SampleType) => item.id || 0));
   }, []);
 
   /*

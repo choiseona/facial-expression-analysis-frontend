@@ -1,5 +1,6 @@
 import postCapturedImages from "@/apis/postCapturedImages";
 import postDetailEmotions from "@/apis/postDetailEmotions";
+import { initialEmotion } from "@/global/data";
 import { EmotionType } from "@/global/type";
 import styled from "styled-components";
 
@@ -30,13 +31,7 @@ function NextTestButton({
     setCapturedImages([]);
     setImageLoaded(false);
     setEmotionTF(true);
-    setDetailEmotion({
-      happy: 0,
-      surprise: 0,
-      angry: 0,
-      fear: 0,
-      sad: 0,
-    });
+    setDetailEmotion(initialEmotion);
   };
 
   const handleClickNextStep = async () => {

@@ -2,15 +2,10 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import postDetailEmotions from "@/apis/postDetailEmotions";
 import postCapturedImages from "@/apis/postCapturedImages";
+import { EmotionType } from "@/global/type";
 
 interface Props {
-  detailEmotion: {
-    happy: number;
-    surprise: number;
-    angry: number;
-    fear: number;
-    sad: number;
-  };
+  detailEmotion: EmotionType;
   id: number | undefined;
   capturedImages: string[];
 }

@@ -1,3 +1,4 @@
+import { ResultType } from "@/global/type";
 import {
   BarChart,
   CartesianGrid,
@@ -9,29 +10,7 @@ import {
 } from "recharts";
 import styled from "styled-components";
 
-interface Props {
-  results: {
-    result: {
-      happy: number | undefined;
-      surprise: number | undefined;
-      angry: number | undefined;
-      fear: number | undefined;
-      sad: number | undefined;
-      neutral: number | undefined;
-    };
-    feedback: {
-      happy: number | undefined;
-      surprise: number | undefined;
-      angry: number | undefined;
-      fear: number | undefined;
-      sad: number | undefined;
-      neutral: number | undefined;
-    };
-    deviation: number | undefined;
-  };
-}
-
-function Graph({ results }: Props) {
+function Graph({ results }: { results: ResultType }) {
   const data = [
     {
       name: "기쁨",

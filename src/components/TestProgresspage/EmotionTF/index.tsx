@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useEffect } from "react";
+import { initialEmotion } from "@/global/data";
 
 interface props {
   emotionTF: boolean;
@@ -22,13 +23,7 @@ function EmotionTF({ setEmotionTF, emotionTF, setDetailEmotion }: props) {
 
   useEffect(() => {
     if (!emotionTF) {
-      setDetailEmotion({
-        happy: 0,
-        surprise: 0,
-        angry: 0,
-        fear: 0,
-        sad: 0,
-      });
+      setDetailEmotion(initialEmotion);
     }
   }, [emotionTF]);
 
