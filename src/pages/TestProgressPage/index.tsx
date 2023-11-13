@@ -6,16 +6,11 @@ import EmotionTF from "@/components/TestProgresspage/EmotionTF";
 import EmotionChoice from "@/components/TestProgresspage/EmotionChoice";
 import NextTestButton from "@/components/TestProgresspage/NextTestButton";
 import TestResultButton from "@/components/TestProgresspage/TestResultButton";
-import axios from "axios";
+import { SampleType } from "@/global/type";
+import getSamples from "@/apis/getSamples";
 
 interface Props {
   setId: React.Dispatch<React.SetStateAction<number[] | undefined>>;
-}
-
-interface SampleType {
-  id: number | undefined;
-  sampleImg: string | undefined;
-  comment: string | undefined;
 }
 
 function TestProgressPage({ setId }: Props) {
@@ -69,23 +64,8 @@ function TestProgressPage({ setId }: Props) {
 
   /*
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/test/start")
-      .then((res) => {
-        const data = res.data.tests;
-        setSample(
-          data.map((item: SampleType) => ({
-            id: item.id,
-            sampleImg: `data:image/jpeg;base64,${item.sampleImg}`,
-            comment: item.comment,
-          }))
-        );
-        setId(data.map((item: SampleType) => item.id || 0));
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+    getSamples({setSample, setId});
+  },[]);
   */
 
   return (

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import styled from "styled-components";
+import postDetailEmotions from "@/apis/postDetailEmotions";
+import postCapturedImages from "@/apis/postCapturedImages";
 
 interface Props {
   detailEmotion: {
@@ -18,60 +19,9 @@ function TestResultButton({ detailEmotion, id, capturedImages }: Props) {
   const navigate = useNavigate();
 
   /*
-  const postDetailEmotion = () => {
-    axios
-      .post(
-        `http://localhost:8080/api/test/feedback?id=${id}`,
-        JSON.stringify(detailEmotion),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
-
-  const dataURItoBlob = (dataURI: string) => {
-    const byteString = atob(dataURI);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
-    }
-
-    return new Blob([int8Array], { type: "image/jpeg" });
-  };
-
-  const postCapturedImages = () => {
-    console.log("id", id);
-    console.log("capturedimages", capturedImages);
-
-    const formData = new FormData();
-    capturedImages?.forEach((image, index) => {
-      const blob = dataURItoBlob(image.split(",")[1]);
-      formData.append(`file${index + 1}`, blob);
-    });
-
-    axios
-      .post(`http://localhost:8080/api/test/camera/${id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
-
-  const postToServer = async () => {
-    postDetailEmotion();
-    postCapturedImages();
-  };
-
   const handleClickResult = async () => {
-    await postToServer();
+    await postDetailEmotions({ id, detailEmotion });
+    await postCapturedImages({ id, capturedImages });
     navigate("/test/result");
   };
 */

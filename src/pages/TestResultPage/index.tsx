@@ -4,29 +4,8 @@ import TestSample from "@/components/TestResultpage/TestSample";
 import UserImage from "@/components/TestResultpage/UserImage";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
-
-interface ResultType {
-  faceImg: string | undefined;
-  sampleImg: string | undefined;
-  result: {
-    happy: number | undefined;
-    surprise: number | undefined;
-    angry: number | undefined;
-    fear: number | undefined;
-    sad: number | undefined;
-    neutral: number | undefined;
-  };
-  feedback: {
-    happy: number | undefined;
-    surprise: number | undefined;
-    angry: number | undefined;
-    fear: number | undefined;
-    sad: number | undefined;
-    neutral: number | undefined;
-  };
-  deviation: number | undefined;
-}
+import { ResultType } from "@/global/type";
+import getResults from "@/apis/getResults";
 
 interface Props {
   id: number[] | undefined;
@@ -60,49 +39,9 @@ function TestResultPage({ id }: Props) {
   /*
   useEffect(() => {
     //서버로부터 모든 샘플에 대한 샘플데이터(문구, 사진), 사용자 반응(사진), ai 분석 수치, 사용자 실제 감정 수치 받기
-
-    
-    axios
-      .post(
-        `http://localhost:8080/api/test/result`,
-        JSON.stringify({ ids: id }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((res) => {
-        const data = res.data.results;
-        setResult(
-          data.map((item: ResultType) => ({
-            faceImg: `data:image/jpeg;base64,${item.faceImg}`,
-            sampleImg: `data:image/jpeg;base64,${item.sampleImg}`,
-            result: {
-              happy: item.result.happy,
-              surprise: item.result.surprise,
-              angry: item.result.angry,
-              fear: item.result.fear,
-              sad: item.result.sad,
-              neutral: item.result.neutral,
-            },
-            feedback: {
-              happy: item.feedback.happy,
-              surprise: item.feedback.surprise,
-              angry: item.feedback.angry,
-              fear: item.feedback.fear,
-              sad: item.feedback.sad,
-              neutral: item.result.neutral,
-            },
-            deviation: item.deviation,
-          }))
-        );
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    getResults({ id, setResult });
   }, []);
-*/
+  */
 
   useEffect(() => {
     //서버로부터 모든 샘플에 대한 샘플데이터(문구, 사진), 사용자 반응(사진), ai 분석 수치, 사용자 실제 감정 수치 받기
