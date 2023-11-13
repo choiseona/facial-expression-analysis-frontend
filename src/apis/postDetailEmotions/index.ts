@@ -6,7 +6,7 @@ interface Variables {
   detailEmotion: EmotionType;
 }
 
-async function postDetailEmotions({ id, detailEmotion }: Variables) {
+function postDetailEmotions({ id, detailEmotion }: Variables) {
   customAxios
     .post(`api/test/feedback?id=${id}`, JSON.stringify(detailEmotion), {
       headers: {

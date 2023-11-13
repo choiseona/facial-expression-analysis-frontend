@@ -39,18 +39,19 @@ function NextTestButton({
     });
   };
 
+  const handleClickNextStep = async () => {
+    await Promise.all([
+      postDetailEmotions({ id, detailEmotion }),
+      postCapturedImages({ id, capturedImages }),
+    ]);
+    initialization();
+  };
+
   /*
   const handleClickNextStep = async () => {
-    await postDetailEmotions({ id, detailEmotion });
-    await postCapturedImages({ id, capturedImages });
     initialization();
   };
 */
-
-  const handleClickNextStep = async () => {
-    initialization();
-  };
-
   return <Button onClick={handleClickNextStep}>다음 테스트</Button>;
 }
 

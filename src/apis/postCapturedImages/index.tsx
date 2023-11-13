@@ -6,7 +6,7 @@ interface Variables {
   id: number | undefined;
 }
 
-async function postCapturedImages({ capturedImages, id }: Variables) {
+function postCapturedImages({ capturedImages, id }: Variables) {
   const formData = new FormData();
   capturedImages?.forEach((image, index) => {
     const blob = dataURItoBlob(image.split(",")[1]);
