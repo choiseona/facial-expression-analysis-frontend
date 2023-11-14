@@ -1,10 +1,11 @@
+import { resultStepAtom, resultsAtom } from "@/global/store";
+import { useAtomValue } from "jotai";
 import styled from "styled-components";
 
-interface Props {
-  image: string | undefined;
-}
+function TestSample() {
+  const resultStep = useAtomValue(resultStepAtom);
+  const image = useAtomValue(resultsAtom)[resultStep - 1].sampleImg;
 
-function TestSample({ image }: Props) {
   return (
     <FlexColumn>
       <Figure>

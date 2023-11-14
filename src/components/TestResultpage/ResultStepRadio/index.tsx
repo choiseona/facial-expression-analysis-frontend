@@ -1,10 +1,10 @@
+import { resultStepAtom } from "@/global/store";
+import { useAtom } from "jotai";
 import styled from "styled-components";
 
-interface Props {
-  resultStep: number;
-  setResultStep: React.Dispatch<React.SetStateAction<number>>;
-}
-function ResultStepRadio({ resultStep, setResultStep }: Props) {
+function ResultStepRadio() {
+  const [resultStep, setResultStep] = useAtom(resultStepAtom);
+
   const handleTochangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
     setResultStep(Number(event.target.value));
   };

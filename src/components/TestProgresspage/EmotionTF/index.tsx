@@ -1,17 +1,45 @@
 import styled from "styled-components";
 import { AnimationControls } from "framer-motion";
-
+import { useAtom, useSetAtom } from "jotai";
+import { detailEmotionAtom, emotionTFAtom } from "@/global/store";
+import { initialEmotion, initialEmotionDropDown } from "@/global/data";
+import { useEffect } from "react";
+import { DropdownOpenType } from "@/global/type";
 interface props {
-  emotionTF: boolean;
-  setEmotionTF: React.Dispatch<React.SetStateAction<boolean>>;
   emotionDetailControl: AnimationControls;
+  setDropdownOpen: React.Dispatch<React.SetStateAction<DropdownOpenType>>;
+  emotionDropdownControls: {
+    happy: AnimationControls;
+    surprise: AnimationControls;
+    angry: AnimationControls;
+    fear: AnimationControls;
+    sad: AnimationControls;
+  };
 }
 
-function EmotionTF({ setEmotionTF, emotionTF, emotionDetailControl }: props) {
+function EmotionTF({
+  emotionDetailControl,
+  setDropdownOpen,
+  emotionDropdownControls,
+}: props) {
+  const [emotionTF, setEmotionTF] = useAtom(emotionTFAtom);
+  const setDetailEmotion = useSetAtom(detailEmotionAtom);
+
   const handleTochangeRadio = () => {
     setEmotionTF((prev) => !prev);
     emotionDetailControl.start(emotionTF ? "closed" : "open");
   };
+
+  useEffect(() => {
+    setDropdownOpen(initialEmotionDropDown);
+    setDetailEmotion(initialEmotion);
+
+    Object.keys(emotionDropdownControls).forEach((key) => {
+      emotionDropdownControls[
+        key as keyof typeof emotionDropdownControls
+      ].start("closed");
+    });
+  }, [emotionTF]);
 
   return (
     <Center>

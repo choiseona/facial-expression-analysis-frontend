@@ -2,15 +2,20 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import postDetailEmotions from "@/apis/postDetailEmotions";
 import postCapturedImages from "@/apis/postCapturedImages";
-import { EmotionType } from "@/global/type";
+import { useAtomValue } from "jotai";
+import {
+  capturedImagesAtom,
+  detailEmotionAtom,
+  samplesAtom,
+  stepAtom,
+} from "@/global/store";
 
-interface Props {
-  detailEmotion: EmotionType;
-  id: number | undefined;
-  capturedImages: string[];
-}
+function TestResultButton() {
+  const detailEmotion = useAtomValue(detailEmotionAtom);
+  const step = useAtomValue(stepAtom);
+  const id = useAtomValue(samplesAtom)[step - 1].id;
+  const capturedImages = useAtomValue(capturedImagesAtom);
 
-function TestResultButton({ detailEmotion, id, capturedImages }: Props) {
   const navigate = useNavigate();
 
   /*

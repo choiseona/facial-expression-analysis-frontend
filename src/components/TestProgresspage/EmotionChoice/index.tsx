@@ -7,19 +7,12 @@ import EmotionDropDown from "../EmotionDropDown";
 import { AnimationControls } from "framer-motion";
 import DropDownMotion from "@/components/Common/DropDownMotion";
 import { DropdownOpenType } from "@/global/type";
+import { useAtomValue, useSetAtom } from "jotai";
+import { detailEmotionAtom, emotionTFAtom } from "@/global/store";
 
 interface Props {
   dropdownOpen: DropdownOpenType;
   setDropdownOpen: React.Dispatch<React.SetStateAction<DropdownOpenType>>;
-  setDetailEmotion: React.Dispatch<
-    React.SetStateAction<{
-      happy: number;
-      surprise: number;
-      angry: number;
-      fear: number;
-      sad: number;
-    }>
-  >;
   emotionDropdownControls: {
     happy: AnimationControls;
     surprise: AnimationControls;
@@ -27,16 +20,15 @@ interface Props {
     fear: AnimationControls;
     sad: AnimationControls;
   };
-  emotionTF: boolean;
 }
 
 function EmotionChoice({
   dropdownOpen,
-  setDropdownOpen,
-  setDetailEmotion,
   emotionDropdownControls,
-  emotionTF,
+  setDropdownOpen,
 }: Props) {
+  const setDetailEmotion = useSetAtom(detailEmotionAtom);
+  const emotionTF = useAtomValue(emotionTFAtom);
   const [detailChoice, setDetailChoice] = useState(initialEmotion);
 
   useEffect(() => {

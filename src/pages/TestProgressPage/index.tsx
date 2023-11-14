@@ -8,32 +8,32 @@ import NextTestButton from "@/components/TestProgresspage/NextTestButton";
 import TestResultButton from "@/components/TestProgresspage/TestResultButton";
 import { DropdownOpenType, SampleType } from "@/global/type";
 import getSamples from "@/apis/getSamples";
-import {
-  initialEmotion,
-  initialEmotionDropDown,
-  initialSample,
-  testSample,
-} from "@/global/data";
+import { initialEmotionDropDown, testSample } from "@/global/data";
 import FadeFramerMotion from "@/components/Common/FadeFramerMotion";
 import { useAnimation } from "framer-motion";
 import DropDownMotion from "@/components/Common/DropDownMotion";
+import { useSetAtom, useAtomValue } from "jotai";
+import {
+  capturedImagesAtom,
+  emotionTFAtom,
+  idsAtom,
+  imageLoadedAtom,
+  samplesAtom,
+  stepAtom,
+} from "@/global/store";
 
-interface Props {
-  setId: React.Dispatch<React.SetStateAction<number[] | undefined>>;
-}
+function TestProgressPage() {
+  const setIds = useSetAtom(idsAtom);
+  const step = useAtomValue(stepAtom);
+  const setSamples = useSetAtom(samplesAtom);
+  const capturedImages = useAtomValue(capturedImagesAtom);
+  const imageLoaded = useAtomValue(imageLoadedAtom);
+  const emotionTF = useAtomValue(emotionTFAtom);
 
-function TestProgressPage({ setId }: Props) {
-  const [capturedImages, setCapturedImages] = useState<string[]>([]);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [emotionTF, setEmotionTF] = useState(true);
-  const [detailEmotion, setDetailEmotion] = useState(initialEmotion);
   const [dropdownOpen, setDropdownOpen] = useState<DropdownOpenType>(
     initialEmotionDropDown
   );
-  const [step, setStep] = useState(1);
-  const [sample, setSample] = useState<SampleType[]>([initialSample]);
   const emotionDetailControl = useAnimation();
-
   const emotionDropdownControls = {
     happy: useAnimation(),
     surprise: useAnimation(),
@@ -42,93 +42,52 @@ function TestProgressPage({ setId }: Props) {
     sad: useAnimation(),
   };
 
-  const initialization = () => {
-    setCapturedImages([]);
-    setImageLoaded(false);
-    setEmotionTF(true);
-    setDetailEmotion(initialEmotion);
-  };
-
   /*
   useEffect(() => {
-    getSamples({ setSample, setId });
+    getSamples({ setSamples, setIds });
   }, []);
 */
 
   useEffect(() => {
-    setSample(
+    setSamples(
       testSample.map((item: SampleType) => ({
         id: item.id,
         sampleImg: item.sampleImg,
         comment: item.comment,
       }))
     );
-    setId(testSample.map((item: SampleType) => item.id || 0));
+    setIds(testSample.map((item: SampleType) => item.id || 0));
   }, []);
-
-  useEffect(() => {
-    setDropdownOpen(initialEmotionDropDown);
-    setDetailEmotion(initialEmotion);
-
-    Object.keys(emotionDropdownControls).forEach((key) => {
-      emotionDropdownControls[
-        key as keyof typeof emotionDropdownControls
-      ].start("closed");
-    });
-  }, [emotionTF]);
-
-  useEffect(() => {
-    initialization();
-  }, [step]);
 
   return (
     <FadeFramerMotion>
       <FlexCenter $isCenter={capturedImages.length !== 5 || !emotionTF}>
         <FadeFramerMotion key={step}>
-          <TestSample
-            capturedImages={capturedImages}
-            setImageLoaded={setImageLoaded}
-            sample={sample[step - 1]}
-          />
+          <TestSample />
         </FadeFramerMotion>
 
         {capturedImages.length === 5 && (
           <EmotionTF
-            setEmotionTF={setEmotionTF}
-            emotionTF={emotionTF}
             emotionDetailControl={emotionDetailControl}
+            emotionDropdownControls={emotionDropdownControls}
+            setDropdownOpen={setDropdownOpen}
           />
         )}
 
         {capturedImages.length === 5 && (
           <DropDownMotion controls={emotionDetailControl} initial="open">
             <EmotionChoice
-              emotionDropdownControls={emotionDropdownControls}
               dropdownOpen={dropdownOpen}
+              emotionDropdownControls={emotionDropdownControls}
               setDropdownOpen={setDropdownOpen}
-              setDetailEmotion={setDetailEmotion}
-              emotionTF={emotionTF}
             />
           </DropDownMotion>
         )}
 
-        {capturedImages.length === 5 && step < 3 && (
-          <NextTestButton
-            id={sample[step - 1].id}
-            detailEmotion={detailEmotion}
-            capturedImages={capturedImages}
-            setStep={setStep}
-          />
-        )}
-        {capturedImages.length === 5 && step === 3 && (
-          <TestResultButton
-            detailEmotion={detailEmotion}
-            id={sample[step - 1].id}
-            capturedImages={capturedImages}
-          />
-        )}
+        {capturedImages.length === 5 && step < 3 && <NextTestButton />}
+        {capturedImages.length === 5 && step === 3 && <TestResultButton />}
       </FlexCenter>
-      {imageLoaded && <Webcam setCapturedImages={setCapturedImages} />}
+      {imageLoaded && <Webcam />}
     </FadeFramerMotion>
   );
 }

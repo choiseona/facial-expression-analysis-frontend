@@ -1,17 +1,30 @@
 import postCapturedImages from "@/apis/postCapturedImages";
 import postDetailEmotions from "@/apis/postDetailEmotions";
-import { EmotionType } from "@/global/type";
+import {
+  capturedImagesAtom,
+  detailEmotionAtom,
+  emotionTFAtom,
+  imageLoadedAtom,
+  samplesAtom,
+  stepAtom,
+} from "@/global/store";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import styled from "styled-components";
+import { initialEmotion } from "@/global/data";
 
-interface Props {
-  id: number | undefined;
-  detailEmotion: EmotionType;
-  capturedImages: string[];
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-}
-function NextTestButton({ id, detailEmotion, capturedImages, setStep }: Props) {
+function NextTestButton() {
+  const [step, setStep] = useAtom(stepAtom);
+  const id = useAtomValue(samplesAtom)[step - 1].id;
+  const [detailEmotion, setDetailEmotion] = useAtom(detailEmotionAtom);
+  const [capturedImages, setCapturedImages] = useAtom(capturedImagesAtom);
+  const setImageLoaded = useSetAtom(imageLoadedAtom);
+  const setEmotionTF = useSetAtom(emotionTFAtom);
+
   const initialization = () => {
-    setStep((prev) => prev + 1);
+    setCapturedImages([]);
+    setImageLoaded(false);
+    setEmotionTF(true);
+    setDetailEmotion(initialEmotion);
   };
 
   /*
@@ -20,11 +33,13 @@ function NextTestButton({ id, detailEmotion, capturedImages, setStep }: Props) {
       postDetailEmotions({ id, detailEmotion }),
       postCapturedImages({ id, capturedImages }),
     ]);
+    setStep((prev) => prev + 1);
     initialization();
   };
 */
 
-  const handleClickNextStep = async () => {
+  const handleClickNextStep = () => {
+    setStep((prev) => prev + 1);
     initialization();
   };
 

@@ -1,15 +1,20 @@
+import {
+  capturedImagesAtom,
+  imageLoadedAtom,
+  samplesAtom,
+  stepAtom,
+} from "@/global/store";
+import { useAtomValue, useSetAtom } from "jotai";
 import styled from "styled-components";
 
-interface props {
-  capturedImages: string[];
-  setImageLoaded: React.Dispatch<React.SetStateAction<boolean>>;
-  sample: {
-    sampleImg: string | undefined;
-    comment: string | undefined;
-  };
-}
+function TestSample() {
+  const step = useAtomValue(stepAtom);
+  const samples = useAtomValue(samplesAtom);
+  const capturedImages = useAtomValue(capturedImagesAtom);
+  const setImageLoaded = useSetAtom(imageLoadedAtom);
 
-function TestSample({ setImageLoaded, sample, capturedImages }: props) {
+  const sample = samples[step - 1];
+
   const handleToImageLoaded = () => {
     setImageLoaded(true);
   };

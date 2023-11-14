@@ -2,19 +2,18 @@ import Graph from "@/components/TestResultpage/Graph";
 import ResultStepRadio from "@/components/TestResultpage/ResultStepRadio";
 import TestSample from "@/components/TestResultpage/TestSample";
 import UserImage from "@/components/TestResultpage/UserImage";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
-import { ResultType } from "@/global/type";
 import getResults from "@/apis/getResults";
-import { initialResult, testResult } from "@/global/data";
+import { testResult } from "@/global/data";
 import FadeFramerMotion from "@/components/Common/FadeFramerMotion";
+import { useAtomValue, useSetAtom } from "jotai";
+import { idsAtom, resultStepAtom, resultsAtom } from "@/global/store";
 
-interface Props {
-  id: number[] | undefined;
-}
-function TestResultPage({ id }: Props) {
-  const [resultStep, setResultStep] = useState(1);
-  const [result, setResult] = useState<ResultType[]>([initialResult]);
+function TestResultPage() {
+  const ids = useAtomValue(idsAtom);
+  const setResult = useSetAtom(resultsAtom);
+  const resultStep = useAtomValue(resultStepAtom);
 
   /*
   useEffect(() => {
@@ -29,17 +28,14 @@ function TestResultPage({ id }: Props) {
   return (
     <FadeFramerMotion>
       <FlexCol>
-        <ResultStepRadio
-          resultStep={resultStep}
-          setResultStep={setResultStep}
-        />
+        <ResultStepRadio />
         <FadeFramerMotion key={resultStep}>
           <FlexRow>
-            <TestSample image={result[resultStep - 1].sampleImg} />
-            <UserImage image={result[resultStep - 1].faceImg} />
+            <TestSample />
+            <UserImage />
           </FlexRow>
         </FadeFramerMotion>
-        <Graph results={result[resultStep - 1]} />
+        <Graph />
       </FlexCol>
     </FadeFramerMotion>
   );

@@ -1,12 +1,11 @@
+import { capturedImagesAtom } from "@/global/store";
 import useWebcam from "@/hooks/useWebcam";
+import { useSetAtom } from "jotai";
 import { useEffect } from "react";
 import styled from "styled-components";
 
-interface props {
-  setCapturedImages: React.Dispatch<React.SetStateAction<string[]>>;
-}
-
-function Webcam({ setCapturedImages }: props) {
+function Webcam() {
+  const setCapturedImages = useSetAtom(capturedImagesAtom);
   const { startWebcam, setTimer, videoRef, canvasRef } = useWebcam({
     setCapturedImages,
   });

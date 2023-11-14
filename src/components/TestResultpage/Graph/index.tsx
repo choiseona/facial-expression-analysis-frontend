@@ -1,4 +1,6 @@
+import { resultStepAtom, resultsAtom } from "@/global/store";
 import { ResultType } from "@/global/type";
+import { useAtomValue } from "jotai";
 import {
   BarChart,
   CartesianGrid,
@@ -10,11 +12,10 @@ import {
 } from "recharts";
 import styled from "styled-components";
 
-interface Props {
-  results: ResultType;
-}
+function Graph() {
+  const resultStep = useAtomValue(resultStepAtom);
+  const results = useAtomValue(resultsAtom)[resultStep - 1];
 
-function Graph({ results }: Props) {
   const data = [
     {
       name: "기쁨",
