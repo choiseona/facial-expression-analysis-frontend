@@ -4,22 +4,15 @@ import styled from "styled-components";
 import DropDown from "@/assets/icon/drop_down-down.svg";
 import { emotion, initialEmotion } from "@/global/data";
 import EmotionDropDown from "../EmotionDropDown";
-import { AnimationControls } from "framer-motion";
 import DropDownMotion from "@/components/Common/DropDownMotion";
-import { DropdownOpenType } from "@/global/type";
+import { DropdownControlsType, DropdownOpenType } from "@/global/type";
 import { useAtomValue, useSetAtom } from "jotai";
 import { detailEmotionAtom, emotionTFAtom } from "@/global/store";
 
 interface Props {
   dropdownOpen: DropdownOpenType;
   setDropdownOpen: React.Dispatch<React.SetStateAction<DropdownOpenType>>;
-  emotionDropdownControls: {
-    happy: AnimationControls;
-    surprise: AnimationControls;
-    angry: AnimationControls;
-    fear: AnimationControls;
-    sad: AnimationControls;
-  };
+  emotionDropdownControls: DropdownControlsType;
 }
 
 function EmotionChoice({

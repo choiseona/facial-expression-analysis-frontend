@@ -1,12 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
 function Header() {
-  const navigate = useNavigate();
   const location = useLocation().pathname;
   const handleClickLogo = () => {
-    navigate("/");
+    window.location.replace("/");
   };
   return (
     <HeaderBar $isHeader={location === "/"}>

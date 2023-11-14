@@ -33,7 +33,6 @@ function EmotionTF({
   useEffect(() => {
     setDropdownOpen(initialEmotionDropDown);
     setDetailEmotion(initialEmotion);
-
     Object.keys(emotionDropdownControls).forEach((key) => {
       emotionDropdownControls[
         key as keyof typeof emotionDropdownControls
