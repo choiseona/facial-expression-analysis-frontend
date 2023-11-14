@@ -23,10 +23,11 @@ const FlexColumn = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  width: 50%;
 `;
 
 const Image = styled.img`
-  height: 225px;
+  width: 100%;
 `;
 
 const Figure = styled.figure`
@@ -34,6 +35,7 @@ const Figure = styled.figure`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
 const FigCaption = styled.figcaption`

@@ -70,6 +70,7 @@ const RadioLabel = styled.label`
   font-weight: 600;
   border: 1px solid white;
   border-radius: 10px;
+  transition: color 0.2s ease;
 
   &:hover {
     cursor: pointer;
@@ -82,5 +83,6 @@ const Input = styled.input`
   &:checked + ${RadioLabel} {
     color: #02020f;
     background-color: #dedede; /* 선택된 경우의 배경색을 원하는 색으로 변경하세요. */
+    transition: color 0.2s ease;
   }
 `;

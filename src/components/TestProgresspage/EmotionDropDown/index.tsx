@@ -49,11 +49,13 @@ const RadioLabel = styled.label`
   color: #eadcdc;
   cursor: pointer;
   font-weight: 600;
+  transition: color 0.2s ease;
 `;
 
 const RadioInput = styled.input`
   display: none;
   &:checked + ${RadioLabel} {
     color: #0092af;
+    transition: color 0.2s ease;
   }
 `;

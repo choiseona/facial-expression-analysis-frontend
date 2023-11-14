@@ -42,6 +42,7 @@ const Button = styled.button`
   color: #cecccc;
   border: none;
   background-color: rgba(255, 255, 255, 0.25);
+  transition: background-color 0.5s ease;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,6 +50,7 @@ const Button = styled.button`
   &:hover {
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.3);
+    transition: background-color 0.5s ease;
   }
 `;
 

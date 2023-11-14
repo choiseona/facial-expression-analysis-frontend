@@ -33,10 +33,12 @@ function TestResultPage({ id }: Props) {
           resultStep={resultStep}
           setResultStep={setResultStep}
         />
-        <FlexRow>
-          <TestSample image={result[resultStep - 1].sampleImg} />
-          <UserImage image={result[resultStep - 1].faceImg} />
-        </FlexRow>
+        <FadeFramerMotion key={resultStep}>
+          <FlexRow>
+            <TestSample image={result[resultStep - 1].sampleImg} />
+            <UserImage image={result[resultStep - 1].faceImg} />
+          </FlexRow>
+        </FadeFramerMotion>
         <Graph results={result[resultStep - 1]} />
       </FlexCol>
     </FadeFramerMotion>
@@ -50,12 +52,15 @@ const FlexCol = styled.div`
   justify-content: center;
   align-items: center;
   gap: 50px;
+  width: 900px;
+  margin: 0 auto;
 `;
 
 const FlexRow = styled.div`
   display: flex;
   justify-content: center;
   gap: 6px;
+  width: 100%;
 `;
 
 export default TestResultPage;

@@ -10,7 +10,11 @@ import {
 } from "recharts";
 import styled from "styled-components";
 
-function Graph({ results }: { results: ResultType }) {
+interface Props {
+  results: ResultType;
+}
+
+function Graph({ results }: Props) {
   const data = [
     {
       name: "기쁨",
@@ -45,12 +49,12 @@ function Graph({ results }: { results: ResultType }) {
   ];
 
   return (
-    <>
+    <Size>
       <TotalErrorComment>
         페이스 인식 기반 감정 분석기의 오차: {`${results.deviation}`}
       </TotalErrorComment>
 
-      <BarChart width={730} height={250} data={data}>
+      <BarChart width={900} height={280} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
@@ -59,11 +63,20 @@ function Graph({ results }: { results: ResultType }) {
         <Bar dataKey="ai 분석 결과" fill="#8884d8" />
         <Bar dataKey="사용자 의견" fill="#82ca9d" />
       </BarChart>
-    </>
+    </Size>
   );
 }
 
 export default Graph;
+
+const Size = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+`;
 
 const TotalErrorComment = styled.p`
   color: #cecccc;

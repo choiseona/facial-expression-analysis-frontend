@@ -42,6 +42,19 @@ function TestProgressPage({ setId }: Props) {
     sad: useAnimation(),
   };
 
+  const initialization = () => {
+    setCapturedImages([]);
+    setImageLoaded(false);
+    setEmotionTF(true);
+    setDetailEmotion(initialEmotion);
+  };
+
+  /*
+  useEffect(() => {
+    getSamples({ setSample, setId });
+  }, []);
+*/
+
   useEffect(() => {
     setSample(
       testSample.map((item: SampleType) => ({
@@ -65,17 +78,8 @@ function TestProgressPage({ setId }: Props) {
   }, [emotionTF]);
 
   useEffect(() => {
-    setCapturedImages([]);
-    setImageLoaded(false);
-    setEmotionTF(true);
-    setDetailEmotion(initialEmotion);
+    initialization();
   }, [step]);
-
-  /*
-  useEffect(() => {
-    getSamples({ setSample, setId });
-  }, []);
-*/
 
   return (
     <FadeFramerMotion>
@@ -123,8 +127,8 @@ function TestProgressPage({ setId }: Props) {
             capturedImages={capturedImages}
           />
         )}
-        {imageLoaded && <Webcam setCapturedImages={setCapturedImages} />}
       </FlexCenter>
+      {imageLoaded && <Webcam setCapturedImages={setCapturedImages} />}
     </FadeFramerMotion>
   );
 }

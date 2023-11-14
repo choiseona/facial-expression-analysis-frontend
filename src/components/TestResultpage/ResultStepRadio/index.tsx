@@ -50,14 +50,17 @@ const Center = styled.div`
   align-items: center;
   color: #dedede;
   gap: 20px;
+  width: 100%;
 `;
 
 const RadioGroup = styled.div`
   display: flex;
+  justify-content: center;
+  width: 100%;
 `;
 
 const RadioLabel = styled.label`
-  width: 300px;
+  width: 33%;
   height: 45px;
   display: flex;
   justify-content: center;
@@ -66,6 +69,7 @@ const RadioLabel = styled.label`
   font-weight: 600;
   border: 1px solid white;
   border-radius: 10px 10px 0 0;
+  transition: all 0.2s ease;
 
   &:hover {
     cursor: pointer;
@@ -77,7 +81,8 @@ const Input = styled.input`
 
   &:checked + ${RadioLabel} {
     color: #02020f;
-    background-color: #dedede; /* 선택된 경우의 배경색을 원하는 색으로 변경하세요. */
+    background-color: #dedede;
+    transition: all 0.2s ease;
   }
 `;
 
