@@ -1,37 +1,17 @@
 import postCapturedImages from "@/apis/postCapturedImages";
 import postDetailEmotions from "@/apis/postDetailEmotions";
-import { initialEmotion } from "@/global/data";
 import { EmotionType } from "@/global/type";
 import styled from "styled-components";
 
 interface Props {
-  step: number;
   id: number | undefined;
   detailEmotion: EmotionType;
   capturedImages: string[];
   setStep: React.Dispatch<React.SetStateAction<number>>;
-  setCapturedImages: React.Dispatch<React.SetStateAction<string[]>>;
-  setImageLoaded: React.Dispatch<React.SetStateAction<boolean>>;
-  setEmotionTF: React.Dispatch<React.SetStateAction<boolean>>;
-  setDetailEmotion: React.Dispatch<React.SetStateAction<EmotionType>>;
 }
-function NextTestButton({
-  step,
-  id,
-  detailEmotion,
-  capturedImages,
-  setStep,
-  setCapturedImages,
-  setImageLoaded,
-  setEmotionTF,
-  setDetailEmotion,
-}: Props) {
+function NextTestButton({ id, detailEmotion, capturedImages, setStep }: Props) {
   const initialization = () => {
-    setStep(step + 1);
-    setCapturedImages([]);
-    setImageLoaded(false);
-    setEmotionTF(true);
-    setDetailEmotion(initialEmotion);
+    setStep((prev) => prev + 1);
   };
 
   /*

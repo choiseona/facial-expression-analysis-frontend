@@ -33,3 +33,11 @@ export interface ResultType {
   };
   deviation: number | undefined;
 }
+
+export interface DropdownOpenType {
+  happy: boolean;
+  surprise: boolean;
+  angry: boolean;
+  fear: boolean;
+  sad: boolean;
+}

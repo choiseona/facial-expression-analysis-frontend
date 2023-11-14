@@ -34,6 +34,14 @@ export const initialResult = {
   deviation: undefined,
 };
 
+export const initialEmotionDropDown = {
+  happy: false,
+  surprise: false,
+  angry: false,
+  fear: false,
+  sad: false,
+};
+
 export const emotion = [
   { korean: "기쁨", english: "happy" },
   { korean: "당황", english: "surprise" },

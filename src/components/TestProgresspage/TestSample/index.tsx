@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 interface props {
   capturedImages: string[];
-  step: number;
   setImageLoaded: React.Dispatch<React.SetStateAction<boolean>>;
   sample: {
     sampleImg: string | undefined;
@@ -31,11 +30,15 @@ function TestSample({ setImageLoaded, sample, capturedImages }: props) {
 export default TestSample;
 
 const FlexColumn = styled.div<{ $isCapturing: boolean }>`
+  margin: 0 auto;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   gap: 10px;
   width: ${(props) => (props.$isCapturing ? "1000px" : "500px")};
+  transition: ${(props) => (props.$isCapturing ? "" : "width 0.7s ease")};
 `;
+
 const Comment = styled.div`
   color: white;
   display: flex;

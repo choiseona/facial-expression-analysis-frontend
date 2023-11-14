@@ -1,31 +1,17 @@
 import styled from "styled-components";
-import { useEffect } from "react";
-import { initialEmotion } from "@/global/data";
+import { AnimationControls } from "framer-motion";
 
 interface props {
   emotionTF: boolean;
   setEmotionTF: React.Dispatch<React.SetStateAction<boolean>>;
-  setDetailEmotion: React.Dispatch<
-    React.SetStateAction<{
-      happy: number;
-      surprise: number;
-      angry: number;
-      fear: number;
-      sad: number;
-    }>
-  >;
+  emotionDetailControl: AnimationControls;
 }
 
-function EmotionTF({ setEmotionTF, emotionTF, setDetailEmotion }: props) {
+function EmotionTF({ setEmotionTF, emotionTF, emotionDetailControl }: props) {
   const handleTochangeRadio = () => {
-    setEmotionTF(!emotionTF);
+    setEmotionTF((prev) => !prev);
+    emotionDetailControl.start(emotionTF ? "closed" : "open");
   };
-
-  useEffect(() => {
-    if (!emotionTF) {
-      setDetailEmotion(initialEmotion);
-    }
-  }, [emotionTF]);
 
   return (
     <Center>
