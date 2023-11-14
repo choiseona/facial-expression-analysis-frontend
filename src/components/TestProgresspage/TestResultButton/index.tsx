@@ -18,7 +18,6 @@ function TestResultButton() {
 
   const navigate = useNavigate();
 
-  /*
   const handleClickResult = async () => {
     await Promise.all([
       postDetailEmotions({ id, detailEmotion }),
@@ -26,11 +25,12 @@ function TestResultButton() {
     ]);
     navigate("/test/result");
   };
-  */
 
+  /*
   const handleClickResult = async () => {
     navigate("/test/result");
   };
+  */
 
   return <Button onClick={handleClickResult}>결과 보기</Button>;
 }

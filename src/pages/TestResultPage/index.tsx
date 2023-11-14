@@ -15,15 +15,15 @@ function TestResultPage() {
   const setResult = useSetAtom(resultsAtom);
   const resultStep = useAtomValue(resultStepAtom);
 
-  /*
   useEffect(() => {
-    getResults({ id, setResult });
+    getResults({ ids, setResult });
   }, []);
-*/
 
+  /*
   useEffect(() => {
     setResult(testResult);
   }, []);
+  */
 
   return (
     <FadeFramerMotion>

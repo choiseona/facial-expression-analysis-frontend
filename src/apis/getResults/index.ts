@@ -2,13 +2,13 @@ import { ResultType } from "@/global/type";
 import customAxios from "..";
 
 interface Variables {
-  id: number[] | undefined;
+  ids: number[] | undefined;
   setResult: React.Dispatch<React.SetStateAction<ResultType[]>>;
 }
 
-function getResults({ id, setResult }: Variables) {
+function getResults({ ids, setResult }: Variables) {
   customAxios
-    .post(`api/test/result`, JSON.stringify({ ids: id }), {
+    .post(`api/test/result`, JSON.stringify({ ids: ids }), {
       headers: {
         "Content-Type": "application/json",
       },

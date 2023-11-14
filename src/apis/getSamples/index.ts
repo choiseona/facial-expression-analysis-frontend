@@ -2,22 +2,22 @@ import customAxios from "..";
 import { SampleType } from "@/global/type";
 
 interface Props {
-  setSample: React.Dispatch<React.SetStateAction<SampleType[]>>;
-  setId: React.Dispatch<React.SetStateAction<number[] | undefined>>;
+  setSamples: React.Dispatch<React.SetStateAction<SampleType[]>>;
+  setIds: React.Dispatch<React.SetStateAction<number[]>>;
 }
-function getSamples({ setSample, setId }: Props) {
+function getSamples({ setSamples, setIds }: Props) {
   customAxios
     .get("api/test/start")
     .then((res) => {
       const data = res.data.tests;
-      setSample(
+      setSamples(
         data.map((item: SampleType) => ({
           id: item.id,
           sampleImg: `data:image/jpeg;base64,${item.sampleImg}`,
           comment: item.comment,
         }))
       );
-      setId(data.map((item: SampleType) => item.id || 0));
+      setIds(data.map((item: SampleType) => item.id || 0));
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
