@@ -33,7 +33,7 @@ function getResults({ ids, setResult }: Variables) {
             angry: item.feedback.angry,
             fear: item.feedback.fear,
             sad: item.feedback.sad,
-            neutral: item.result.neutral,
+            neutral: item.feedback.neutral,
           },
           deviation: item.deviation,
         }))

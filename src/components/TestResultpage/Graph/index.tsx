@@ -15,7 +15,7 @@ import styled from "styled-components";
 function Graph() {
   const resultStep = useAtomValue(resultStepAtom);
   const results = useAtomValue(resultsAtom)[resultStep - 1];
-
+  console.log(results.result.neutral);
   const data = [
     {
       name: "기쁨",
