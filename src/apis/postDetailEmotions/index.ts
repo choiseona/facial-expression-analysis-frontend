@@ -6,15 +6,23 @@ interface Variables {
   detailEmotion: EmotionType;
 }
 
-function postDetailEmotions({ id, detailEmotion }: Variables) {
-  customAxios
-    .post(`api/test/feedback?id=${id}`, JSON.stringify(detailEmotion), {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+async function postDetailEmotions({ id, detailEmotion }: Variables) {
+  try {
+    const response = await customAxios.post(
+      `api/test/feedback?id=${id}`,
+      JSON.stringify(detailEmotion),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response);
+    return response;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 }
 
 export default postDetailEmotions;

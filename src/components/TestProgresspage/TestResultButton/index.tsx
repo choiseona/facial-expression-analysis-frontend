@@ -19,11 +19,16 @@ function TestResultButton() {
   const navigate = useNavigate();
 
   const handleClickResult = async () => {
-    await Promise.all([
-      postDetailEmotions({ id, detailEmotion }),
-      postCapturedImages({ id, capturedImages }),
-    ]);
-    navigate("/test/result");
+    try {
+      await Promise.all([
+        postCapturedImages({ id, capturedImages }),
+        postDetailEmotions({ id, detailEmotion }),
+      ]);
+
+      navigate("/test/result");
+    } catch (error) {
+      console.log("An error occurred:", error);
+    }
   };
 
   /*
