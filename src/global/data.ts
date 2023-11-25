@@ -53,17 +53,17 @@ export const emotion = [
 export const testSample = [
   {
     id: 1,
-    sampleImg: "/src/assets/image/puppy1.jpg",
+    sampleImg: "/src/assets/video/night_sky.mp4",
     comment: "test1",
   },
   {
     id: 2,
-    sampleImg: "/src/assets/image/puppy2.jpg",
+    sampleImg: "/src/assets/video/night_sky.mp4",
     comment: "test2",
   },
   {
     id: 3,
-    sampleImg: "/src/assets/image/puppy3.jpg",
+    sampleImg: "/src/assets/video/night_sky.mp4",
     comment: "test3",
   },
 ];
