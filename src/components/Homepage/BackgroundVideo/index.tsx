@@ -1,3 +1,4 @@
+import background from "@/assets/video/background.mp4";
 import styled from "styled-components";
 
 const Source = styled.source``;
@@ -9,11 +10,7 @@ function BackgroundVideo() {
       <BelowShadow />
 
       <VideoPlayer autoPlay muted loop role="videoPlayer">
-        <Source
-          role="videoSource"
-          src="/src/assets/video/background-video.mp4"
-          type="video/mp4"
-        />
+        <Source role="videoSource" src={background} type="video/mp4" />
       </VideoPlayer>
     </Wrapper>
   );

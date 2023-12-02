@@ -18,7 +18,6 @@ function TestResultButton() {
 
   const navigate = useNavigate();
 
-  /*
   const handleClickResult = async () => {
     try {
       await Promise.all([
@@ -31,11 +30,12 @@ function TestResultButton() {
       console.log("An error occurred:", error);
     }
   };
-*/
 
+  /*
   const handleClickResult = async () => {
     navigate("/test/result");
   };
+  */
 
   return <Button onClick={handleClickResult}>결과 보기</Button>;
 }
