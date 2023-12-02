@@ -40,7 +40,7 @@ const FlexColumn = styled.div<{ $isCapturing: boolean }>`
   justify-content: center;
   flex-direction: column;
   gap: 10px;
-  width: ${(props) => (props.$isCapturing ? "1000px" : "500px")};
+  width: ${(props) => (props.$isCapturing ? "550px" : "500px")};
   transition: ${(props) => (props.$isCapturing ? "" : "width 0.7s ease")};
 `;
 
