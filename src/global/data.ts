@@ -53,25 +53,25 @@ export const emotion = [
 export const testSample = [
   {
     id: 1,
-    sampleImg: "/src/assets/image/puppy1.jpg",
+    sampleImg: "/src/assets/image/sample1.jpg",
     comment: "test1",
   },
   {
     id: 2,
-    sampleImg: "/src/assets/image/puppy2.jpg",
+    sampleImg: "/src/assets/image/sample2.jpg",
     comment: "test2",
   },
   {
     id: 3,
-    sampleImg: "/src/assets/image/puppy3.jpg",
+    sampleImg: "/src/assets/image/sample3.jpg",
     comment: "test3",
   },
 ];
 
 export const testResult = [
   {
-    sampleImg: "/src/assets/image/puppy1.jpg",
-    faceImg: "/src/assets/image/puppy1.jpg",
+    sampleImg: "/src/assets/image/sample1.jpg",
+    faceImg: "/src/assets/image/sample1.jpg",
     result: {
       happy: 0.1,
       surprise: 0.1,
@@ -91,8 +91,8 @@ export const testResult = [
     deviation: 10,
   },
   {
-    sampleImg: "/src/assets/image/puppy2.jpg",
-    faceImg: "/src/assets/image/puppy2.jpg",
+    sampleImg: "/src/assets/image/sample2.jpg",
+    faceImg: "/src/assets/image/sample2.jpg",
     result: {
       happy: 0.2,
       surprise: 0.2,
@@ -112,8 +112,8 @@ export const testResult = [
     deviation: 20,
   },
   {
-    sampleImg: "/src/assets/image/puppy3.jpg",
-    faceImg: "/src/assets/image/puppy3.jpg",
+    sampleImg: "/src/assets/image/sample3.jpg",
+    faceImg: "/src/assets/image/sample3.jpg",
     result: {
       happy: 0.3,
       surprise: 0.3,
