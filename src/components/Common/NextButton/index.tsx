@@ -1,27 +1,28 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface props {
-  address?: string;
-  content?: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  content: string;
+  isMarginBottom?: boolean;
 }
 
-function NavigationButton({ address, content }: props) {
-  const navigate = useNavigate();
-  const handleClickButton = () => {
-    navigate(`${address}`);
-  };
-  return <Button onClick={handleClickButton}>{content}</Button>;
+function NextButton({ content, onClick, isMarginBottom }: props) {
+  return (
+    <Button $isMarginBottom={!!isMarginBottom} onClick={onClick}>
+      {content}
+    </Button>
+  );
 }
 
-export default NavigationButton;
+export default NextButton;
 
-const Button = styled.button`
+const Button = styled.button<{ $isMarginBottom: boolean }>`
   z-index: 20;
   width: 150px;
   font-size: 1.2rem;
   font-weight: 550;
   padding: 10px 0;
+  margin-bottom: ${(props) => (props.$isMarginBottom ? "50px" : "0")};
   border-radius: 10px;
   color: #cecccc;
   border: none;

@@ -21,11 +21,7 @@ function Webcam() {
     }
   };
 
-  return (
-    <>
-      <Video ref={videoRef} autoPlay playsInline muted />
-    </>
-  );
+  return <Video ref={videoRef} autoPlay playsInline muted />;
 }
 
 export default Webcam;

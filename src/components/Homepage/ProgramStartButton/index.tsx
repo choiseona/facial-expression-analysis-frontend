@@ -1,12 +1,12 @@
-import NavigationButton from "@/components/Common/NavigationButton";
+import Button from "@/components/Common/NextButton";
+import { useNavigate } from "react-router-dom";
 
 function ProgramStartButton() {
-  return (
-    <NavigationButton
-      address="/test/prepare"
-      content="시작하기"
-    ></NavigationButton>
-  );
+  const navigate = useNavigate();
+  const handleClickButton = () => {
+    navigate("/test/prepare");
+  };
+  return <Button onClick={handleClickButton} content="시작하기"></Button>;
 }
 
 export default ProgramStartButton;

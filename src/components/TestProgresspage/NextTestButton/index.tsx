@@ -11,6 +11,7 @@ import {
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import styled from "styled-components";
 import { initialEmotion } from "@/global/data";
+import NextButton from "@/components/Common/NextButton";
 
 function NextTestButton() {
   const [step, setStep] = useAtom(stepAtom);
@@ -27,6 +28,7 @@ function NextTestButton() {
     setDetailEmotion(initialEmotion);
   };
 
+  /*
   const handleClickNextStep = async () => {
     await Promise.all([
       postDetailEmotions({ id, detailEmotion }),
@@ -35,38 +37,20 @@ function NextTestButton() {
     setStep((prev) => prev + 1);
     initialization();
   };
+  */
 
-  /*
   const handleClickNextStep = () => {
     setStep((prev) => prev + 1);
     initialization();
   };
-   */
 
-  return <Button onClick={handleClickNextStep}>다음 테스트</Button>;
+  return (
+    <NextButton
+      onClick={handleClickNextStep}
+      content="다음 테스트"
+      isMarginBottom={true}
+    />
+  );
 }
-
-const Button = styled.button`
-  z-index: 20;
-  width: 150px;
-  font-size: 1.1rem;
-  font-weight: 550;
-  padding: 10px 0;
-  margin-bottom: 50px;
-  border-radius: 10px;
-  color: #cecccc;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.25);
-  transition: background-color 0.5s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.3);
-    transition: background-color 0.5s ease;
-  }
-`;
 
 export default NextTestButton;
