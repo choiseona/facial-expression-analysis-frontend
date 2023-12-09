@@ -88,6 +88,14 @@ function TestProgressPage() {
         {capturedImages.length === 5 && step === 3 && <TestResultButton />}
       </FlexCenter>
       {imageLoaded && <Webcam />}
+      {capturedImages.length === 5 &&
+        capturedImages.map((_, index) => (
+          <img
+            key={index}
+            src={capturedImages[index]}
+            alt={`photo ${index + 1}`}
+          />
+        ))}
     </FadeFramerMotion>
   );
 }

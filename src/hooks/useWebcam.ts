@@ -31,8 +31,10 @@ function useWebcam({ setCapturedImages }: props) {
     if (context && video.videoWidth && video.videoHeight) {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
+      context.scale(-1, 1);
 
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      // 원본 비디오의 가로 길이만큼 이동하여 좌우 반전 효과를 얻음
+      context.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
 
       const imageDataUrl = canvas.toDataURL("image/jpeg");
       setCapturedImages((prevImages) => [...prevImages, imageDataUrl]);
