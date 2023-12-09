@@ -28,7 +28,6 @@ function NextTestButton() {
     setDetailEmotion(initialEmotion);
   };
 
-  /*
   const handleClickNextStep = async () => {
     await Promise.all([
       postDetailEmotions({ id, detailEmotion }),
@@ -37,12 +36,13 @@ function NextTestButton() {
     setStep((prev) => prev + 1);
     initialization();
   };
-  */
 
+  /*
   const handleClickNextStep = () => {
     setStep((prev) => prev + 1);
     initialization();
   };
+  */
 
   return (
     <NextButton

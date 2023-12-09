@@ -42,12 +42,11 @@ function TestProgressPage() {
     sad: useAnimation(),
   };
 
-  /*
   useEffect(() => {
     getSamples({ setSamples, setIds });
   }, []);
-  */
 
+  /*
   useEffect(() => {
     setSamples(
       testSample.map((item: SampleType) => ({
@@ -58,6 +57,7 @@ function TestProgressPage() {
     );
     setIds(testSample.map((item: SampleType) => item.id || 0));
   }, []);
+  */
 
   return (
     <FadeFramerMotion>

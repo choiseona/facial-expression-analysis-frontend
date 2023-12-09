@@ -19,7 +19,6 @@ function TestResultButton() {
 
   const navigate = useNavigate();
 
-  /*
   const handleClickResult = async () => {
     try {
       await Promise.all([
@@ -32,11 +31,12 @@ function TestResultButton() {
       console.log("An error occurred:", error);
     }
   };
-  */
 
+  /*
   const handleClickResult = () => {
     navigate("/test/result");
   };
+  */
 
   return (
     <NextButton
