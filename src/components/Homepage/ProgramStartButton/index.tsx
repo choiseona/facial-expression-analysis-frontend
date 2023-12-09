@@ -6,7 +6,7 @@ function ProgramStartButton() {
   const handleClickButton = () => {
     navigate("/test/prepare");
   };
-  return <Button onClick={handleClickButton} content="시작하기"></Button>;
+  return <Button onClick={handleClickButton} content="시작하기" />;
 }
 
 export default ProgramStartButton;

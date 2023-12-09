@@ -28,6 +28,7 @@ export default Webcam;
 const Video = styled.video`
   position: absolute;
   left: -100000px;
+  transform: scaleX(-1);
 `;
 
 const Canvas = styled.canvas`
