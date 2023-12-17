@@ -9,7 +9,6 @@ import {
   stepAtom,
 } from "@/global/store";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import styled from "styled-components";
 import { initialEmotion } from "@/global/data";
 import NextButton from "@/components/Common/NextButton";
 
@@ -36,13 +35,6 @@ function NextTestButton() {
     setStep((prev) => prev + 1);
     initialization();
   };
-
-  /*
-  const handleClickNextStep = () => {
-    setStep((prev) => prev + 1);
-    initialization();
-  };
-*/
 
   return (
     <NextButton

@@ -5,7 +5,6 @@ import UserImage from "@/components/TestResultpage/UserImage";
 import { useEffect } from "react";
 import styled from "styled-components";
 import getResults from "@/apis/getResults";
-import { testResult } from "@/global/data";
 import FadeFramerMotion from "@/components/Common/FadeFramerMotion";
 import { useAtomValue, useSetAtom } from "jotai";
 import { idsAtom, resultStepAtom, resultsAtom } from "@/global/store";
@@ -18,12 +17,6 @@ function TestResultPage() {
   useEffect(() => {
     getResults({ ids, setResult });
   }, []);
-
-  /*
-  useEffect(() => {
-    setResult(testResult);
-  }, []);
-  */
 
   return (
     <FadeFramerMotion>

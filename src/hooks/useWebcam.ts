@@ -55,7 +55,6 @@ function useWebcam({ setCapturedImages }: props) {
       }
 
       if (repeatCount <= 5) {
-        //왜 '<5' 로 하면 4번만 캡처되지? 해결해야함
         requestAnimationFrame(setTimeInterval);
       }
     };

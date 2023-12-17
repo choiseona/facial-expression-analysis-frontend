@@ -6,9 +6,9 @@ import EmotionTF from "@/components/TestProgresspage/EmotionTF";
 import EmotionChoice from "@/components/TestProgresspage/EmotionChoice";
 import NextTestButton from "@/components/TestProgresspage/NextTestButton";
 import TestResultButton from "@/components/TestProgresspage/TestResultButton";
-import { DropdownOpenType, SampleType } from "@/global/type";
+import { DropdownOpenType } from "@/global/type";
 import getSamples from "@/apis/getSamples";
-import { initialEmotionDropDown, testSample } from "@/global/data";
+import { initialEmotionDropDown } from "@/global/data";
 import FadeFramerMotion from "@/components/Common/FadeFramerMotion";
 import { useAnimation } from "framer-motion";
 import DropDownMotion from "@/components/Common/DropDownMotion";
@@ -46,19 +46,6 @@ function TestProgressPage() {
     getSamples({ setSamples, setIds });
   }, []);
 
-  /*
-  useEffect(() => {
-    setSamples(
-      testSample.map((item: SampleType) => ({
-        id: item.id,
-        sampleImg: item.sampleImg,
-        comment: item.comment,
-      }))
-    );
-    setIds(testSample.map((item: SampleType) => item.id || 0));
-  }, []);
-  */
-
   return (
     <FadeFramerMotion>
       <FlexCenter $isCenter={capturedImages.length !== 5 || !emotionTF}>
@@ -88,14 +75,6 @@ function TestProgressPage() {
         {capturedImages.length === 5 && step === 3 && <TestResultButton />}
       </FlexCenter>
       {imageLoaded && <Webcam />}
-      {capturedImages.length === 5 &&
-        capturedImages.map((_, index) => (
-          <img
-            key={index}
-            src={capturedImages[index]}
-            alt={`photo ${index + 1}`}
-          />
-        ))}
     </FadeFramerMotion>
   );
 }

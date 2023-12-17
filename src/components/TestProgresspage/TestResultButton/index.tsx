@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import postDetailEmotions from "@/apis/postDetailEmotions";
 import postCapturedImages from "@/apis/postCapturedImages";
 import { useAtomValue } from "jotai";
@@ -31,12 +30,6 @@ function TestResultButton() {
       console.log("An error occurred:", error);
     }
   };
-
-  /*
-  const handleClickResult = () => {
-    navigate("/test/result");
-  };
-  */
 
   return (
     <NextButton
